@@ -1,6 +1,6 @@
 package Semant.Types;
 
-import Semant.Visitor;
+//import Semant.Visitor;
 
 public class VOID extends Type{
 

@@ -1,18 +1,10 @@
 package Semant.Types;
 
-//import Semant.Visitor;
+import Semant.Visitor;
 
-public class CLASS extends Type{
-	
-	public RECORD fields;
-	public OBJECT instance;
-	public RECORD methods;
-	public String name;
-	public CLASS parent;
-	
-	public CLASS(String s){
-		this.name = s;
-		
+public class BOOLEAN extends Type {
+	public BOOLEAN(){
+		;
 	}
 
 	@Override

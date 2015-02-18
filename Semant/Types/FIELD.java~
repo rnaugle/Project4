@@ -1,18 +1,16 @@
 package Semant.Types;
 
-//import Semant.Visitor;
+import Semant.Visitor;
 
-public class CLASS extends Type{
-	
-	public RECORD fields;
-	public OBJECT instance;
-	public RECORD methods;
+public class FIELD extends Type{
+	public int index;
 	public String name;
-	public CLASS parent;
+	public Type type;
 	
-	public CLASS(String s){
-		this.name = s;
-		
+	public FIELD(Type t, int i, String n){
+		this.index = i;
+		this.name = n;
+		this.type = t;
 	}
 
 	@Override

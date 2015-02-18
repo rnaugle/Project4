@@ -1,7 +1,7 @@
 package Semant.Types;
 
-import Semant.Visitable;
-import Semant.Visitor;
+//import Semant.Types.Visitable;
+//import Semant.Types.Visitor;
 
 public class ARRAY extends Type  {
 	public Type element;

@@ -1,10 +1,26 @@
 package Semant.Types;
 
-//import Semant.Visitor;
+import java.util.Iterator;
 
-public class INT extends Type{
+import Semant.Visitor;
+
+public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 	
-	public INT(){
+	public RECORD(){
+		
+	}
+	
+	public FIELD get(String name){
+		return null;
+	}
+	
+	public Iterator<FIELD> iterator(){
+		return null;
+		
+	}
+	
+	public FIELD put(Type type, String name){
+		return null;
 		
 	}
 

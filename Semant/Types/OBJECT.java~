@@ -1,18 +1,23 @@
 package Semant.Types;
 
-//import Semant.Visitor;
+import Semant.Visitor;
 
-public class CLASS extends Type{
+public class OBJECT extends Type{
 	
 	public RECORD fields;
-	public OBJECT instance;
 	public RECORD methods;
-	public String name;
-	public CLASS parent;
+	public CLASS myClass;
 	
-	public CLASS(String s){
-		this.name = s;
-		
+	public OBJECT(CLASS m){
+		this.myClass = m;
+		methods = new RECORD();
+		fields = new RECORD();
+	}
+	
+	public OBJECT(CLASS m, RECORD meth, RECORD f){
+		this.fields = f;
+		this.methods = meth;
+		this.myClass = m;
 	}
 
 	@Override
@@ -22,8 +27,7 @@ public class CLASS extends Type{
 	}
 
 	@Override
-	public
-	boolean coerceTo(Type t) {
+	public boolean coerceTo(Type t) {
 		// TODO Auto-generated method stub
 		return false;
 	}

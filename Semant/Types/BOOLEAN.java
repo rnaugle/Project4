@@ -1,6 +1,6 @@
 package Semant.Types;
 
-import Semant.Visitor;
+//import Semant.Types.Visitor;
 
 public class BOOLEAN extends Type {
 	public BOOLEAN(){
