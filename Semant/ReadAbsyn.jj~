@@ -301,10 +301,7 @@ void VarDecl(LinkedList<Absyn.VarDecl> vl) :
 	type = Type() name = <ID> 
 	("null" |  init = Expr() )
 	")"
-	{ 
-	//TODO: new field with the return type (maybe?)
-	//	Types returnType = findReturnType(type)
-	vl.add(new Absyn.VarDecl(type, name.image, init)); }
+	{ vl.add(new Absyn.VarDecl(type, name.image, init)); }
 }
 
 Absyn.Type Type() : 
