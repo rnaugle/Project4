@@ -1,0 +1,43 @@
+PARSER   = Demo10Parser
+
+JAVAC    = javac
+JAVA     = java
+JAVACC   = javacc
+JJDOC    = jjdoc
+
+JAVACC_FLAGS = -NOSTATIC
+
+JAVACCGEN = SimpleCharStream.java ParseException.java \
+        $(PARSER).java $(PARSER)Constants.java \
+        $(PARSER)TokenManager.java Token.java \
+        TokenMgrError.java
+
+ABSYN    = Absyn/Goal.java Absyn/Exp.java \
+	Absyn/AddExp.java Absyn/SubExp.java \
+	Absyn/MulExp.java Absyn/DivExp.java \
+	Absyn/NumExp.java Absyn/IdExp.java
+
+VISIT    = Visit/Visitable.java Visit/Visitor.java \
+	Visit/IntVisitor.java Visit/PrintVisitor.java \
+	Visit/AbsynPrintVisitor.java \
+	Visit/Interpreter.java
+
+SRCS     = $(ABSYN) $(VISIT) $(PARSER).java Main.java
+
+all:  $(SRCS:.java=.class)
+
+%.class : %.java
+	$(JAVAC) $<
+
+
+
+$(PARSER).java: $(PARSER).jj
+	$(JAVACC) $(JAVACC_FLAGS) $<
+
+parser: $(PARSER).class $(PARSER)Constants.class \
+	$(PARSER)TokenManager.class ParseException.class
+
+main: $(PARSER).class Main.class
+
+clean:
+	rm -f $(SRCS:.java=.class) ${JAVACCGEN} $(JAVACCGEN:.java=.class)
