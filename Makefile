@@ -49,7 +49,7 @@ SRCS     = $(VISIT) $(ABSYN) $(PARSER).java Semant/Main.java
 all:  $(SRCS:.java=.class)
 
 %.class : %.java
-	$(JAVAC) $(JAVAC_FLAGS) $<
+	$(JAVAC) $<
 
 
 
