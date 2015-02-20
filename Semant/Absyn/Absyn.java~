@@ -1,10 +1,12 @@
 package Absyn;
+//import Semant.Visit.Visitor;
+import Semant.Vitsi.*;
 
-public abstract class Absyn implements Visit.Visitable{
+public abstract class Absyn implements Semant.Visit.Visitable{
 
 	public abstract String toString();
 	
-	public void accept(Visit.Visitor v){v.visit(this);}
+	public void accept(Semant.Visit.Visitor v){v.visit(this);}
 	
 
 	

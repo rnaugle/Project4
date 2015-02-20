@@ -1,5 +1,10 @@
 
+<<<<<<< .merge_file_2zQgtB
 package Semant.Visit;
+=======
+package Visit;
+import Semant.Absyn.*;
+>>>>>>> .merge_file_M0zFhx
 
 /**
  * Visitor.java
