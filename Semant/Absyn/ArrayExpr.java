@@ -10,5 +10,5 @@ public class ArrayExpr extends AssignableExpr{
 	 public String toString()
 	  {   return this.target + " [ " + this.index + " ] ";   }
 	
-	 public void accept(Visit.Visitor v)      {          v.visit(this);   }
+	 public void accept(Semant.Visit.Visitor v)      {          v.visit(this);   }
 }

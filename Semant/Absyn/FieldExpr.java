@@ -11,5 +11,5 @@ public class FieldExpr extends AssignableExpr{
 	public String toString()
 	  {   return "";   }
 	
-	public void accept(Visit.Visitor v)      {          v.visit(this);   }
+	public void accept(Semant.Visit.Visitor v)      {          v.visit(this);   }
 }

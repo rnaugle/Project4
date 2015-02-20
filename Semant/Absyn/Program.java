@@ -18,5 +18,5 @@ public class Program extends Absyn{
 		}
 	}
 	
-	public void accept(Visit.Visitor v){v.visit(this);}
+	public void accept(Semant.Visit.Visitor v){v.visit(this);}
 }
