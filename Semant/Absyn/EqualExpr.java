@@ -1,4 +1,4 @@
-package Absyn;
+package Semant.Absyn;
 
 public class EqualExpr extends BinOpExpr{
 	public EqualExpr(Expr e1, Expr e2){

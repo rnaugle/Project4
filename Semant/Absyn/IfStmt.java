@@ -1,4 +1,4 @@
-package Absyn;
+package Semant.Absyn;
 
 public class IfStmt extends Stmt{
 	public Expr testl;

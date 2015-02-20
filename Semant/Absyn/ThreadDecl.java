@@ -1,4 +1,4 @@
-package Absyn;
+package Semant.Absyn;
 
 public class ThreadDecl extends ClassDecl{
 	//TODO: no clue what to do for parent

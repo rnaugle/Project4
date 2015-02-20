@@ -1,4 +1,4 @@
-package Absyn;
+package Semant.Absyn;
 
 public class ClassDecl extends Absyn{
 	public java.lang.String name;
