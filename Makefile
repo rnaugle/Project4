@@ -38,7 +38,6 @@ ABSYN    = Semant/Absyn/Absyn.java Semant/Absyn/Expr.java \
 	Semant/Absyn/VoidDecl.java Semant/Absyn/WhileStmt.java \
 	Semant/Absyn/XinuCallExpr.java Semant/Absyn/XinuCallStmt.java
 
-<<<<<<< .merge_file_vNjkSn
 VISIT    = Semant/Visit/Visitable.java Semant/Visit/Visitor.java \
 	Semant/Visit/IntVisitor.java Semant/Visit/PrintVisitor.java \
 	Semant/Visit/AbsynPrintVisitor.java \
@@ -49,22 +48,14 @@ TYPES	 = Semant/Types/ARRAY.java Semant/Types/BOOLEAN.java \
 	Semant/Types/FUNCTION.java Semant/Types/INT.java \
 	Semant/Types/NIL.java Semant/Types/OBJECT.java \
 	Semant/Types/RECORD.java Semant/Types/STRING.java \
-	Semant/Types/Type.java Semant/Types/VOID.java \
-	
-=======
-VISIT    = Semant/Visit/Visitor.java \
-	Semant/Visit/Visitable.java \
-	Semant/Visit/PrintVisitor.java \
-	Semant/Visit/AbsynPrintVisitor.java 
-#	Semant/Visit/Interpreter.java
->>>>>>> .merge_file_JfAijl
+	Semant/Types/Type.java Semant/Types/VOID.java
 
 SRCS     = $(VISIT) $(ABSYN) $(PARSER).java Semant/Main.java
 
 all:  $(SRCS:.java=.class)
 
 %.class : %.java
-	$(JAVAC) $(JAVAC_FLAGS) $<
+	$(JAVAC) $<
 
 
 
