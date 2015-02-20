@@ -1,4 +1,4 @@
-package Absyn;
+package Semant.Absyn;
 
 import java.util.LinkedList;
 

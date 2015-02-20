@@ -1,4 +1,4 @@
-package Absyn;
+package Semant.Absyn;
 
 public class ArrayExpr extends AssignableExpr{
 	public Expr target, index;

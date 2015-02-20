@@ -1,4 +1,4 @@
-package Absyn;
+package Semant.Absyn;
 
 public class AssignStmt extends Stmt{
 	public AssignableExpr lhs; Expr rhs;

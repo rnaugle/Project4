@@ -1,4 +1,4 @@
-package Absyn;
+package Semant.Absyn;
 
 public class BinOpExpr extends Expr{
 	public Expr e1, e2;

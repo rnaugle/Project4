@@ -1,4 +1,4 @@
-package Absyn;
+package Semant.Absyn;
 
 public class IntegerLiteral extends Expr{
 	public int value;

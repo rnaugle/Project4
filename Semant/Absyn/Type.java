@@ -1,4 +1,4 @@
-package Absyn;
+package Semant.Absyn;
 
 public class Type extends Absyn{
 	public Type(){
