@@ -1,6 +1,4 @@
-
-package Visit;
-import Semant.Absyn.*;
+package Semant.Visit;
 
 /**
  * Visitor.java
@@ -17,55 +15,67 @@ public interface Visitor
  
   
   
-  public void visit(Absyn.Absyn a);
-  public void visit(Absyn.AddExpr e);
-  public void visit(Absyn.AndExpr e);
-  public void visit(Absyn.ArrayExpr e);
-  public void visit(Absyn.ArrayType e);
-  public void visit(Absyn.AssignableExpr e);
-  public void visit(Absyn.AssignStmt e);
-  public void visit(Absyn.BinOpExpr e);
-  public void visit(Absyn.BlockStmt e);
-  public void visit(Absyn.BooleanType e);
-  public void visit(Absyn.CallExpr e);
-  public void visit(Absyn.ClassDecl e);
-  public void visit(Absyn.DivExpr e);
-  public void visit(Absyn.EqualExpr e);
-  public void visit(Absyn.Expr e);
-  public void visit(Absyn.FalseExpr e);
-  public void visit(Absyn.FieldExpr e);
-  public void visit(Absyn.Formal e);
-  public void visit(Absyn.GreaterExpr e);
-  public void visit(Absyn.IdentifierExpr e);
-  public void visit(Absyn.IdentifierType e);
-  public void visit(Absyn.IfStmt e);
-  public void visit(Absyn.IntegerLiteral e);
-  public void visit(Absyn.IntegerType e);
-  public void visit(Absyn.LesserExpr e);
-  public void visit(Absyn.MethodDecl e);
-  public void visit(Absyn.MulExpr e);
-  public void visit(Absyn.NegExpr e);
-  public void visit(Absyn.NewArrayExpr e);
-  public void visit(Absyn.NewObjectExpr e);
-  public void visit(Absyn.NotEqExpr e);
+  public void visit(Semant.Absyn.Absyn a);
+  public void visit(Semant.Absyn.AddExpr e);
+  public void visit(Semant.Absyn.AndExpr e);
+  public void visit(Semant.Absyn.ArrayExpr e);
+  public void visit(Semant.Absyn.ArrayType e);
+  public void visit(Semant.Absyn.AssignableExpr e);
+  public void visit(Semant.Absyn.AssignStmt e);
+  public void visit(Semant.Absyn.BinOpExpr e);
+  public void visit(Semant.Absyn.BlockStmt e);
+  public void visit(Semant.Absyn.BooleanType e);
+  public void visit(Semant.Absyn.CallExpr e);
+  public void visit(Semant.Absyn.ClassDecl e);
+  public void visit(Semant.Absyn.DivExpr e);
+  public void visit(Semant.Absyn.EqualExpr e);
+  public void visit(Semant.Absyn.Expr e);
+  public void visit(Semant.Absyn.FalseExpr e);
+  public void visit(Semant.Absyn.FieldExpr e);
+  public void visit(Semant.Absyn.Formal e);
+  public void visit(Semant.Absyn.GreaterExpr e);
+  public void visit(Semant.Absyn.IdentifierExpr e);
+  public void visit(Semant.Absyn.IdentifierType e);
+  public void visit(Semant.Absyn.IfStmt e);
+  public void visit(Semant.Absyn.IntegerLiteral e);
+  public void visit(Semant.Absyn.IntegerType e);
+  public void visit(Semant.Absyn.LesserExpr e);
+  public void visit(Semant.Absyn.MethodDecl e);
+  public void visit(Semant.Absyn.MulExpr e);
+  public void visit(Semant.Absyn.NegExpr e);
+  public void visit(Semant.Absyn.NewArrayExpr e);
+  public void visit(Semant.Absyn.NewObjectExpr e);
+  public void visit(Semant.Absyn.NotEqExpr e);
   
-  public void visit(Absyn.NullExpr e);
-  public void visit(Absyn.OrExpr e);
-  public void visit(Absyn.PrintVisitor e);
+  public void visit(Semant.Absyn.NullExpr e);
+  public void visit(Semant.Absyn.OrExpr e);
+  public void visit(Semant.Absyn.PrintVisitor e);
   
-  public void visit(Absyn.Program e);
-  public void visit(Absyn.Stmt e);
-  public void visit(Absyn.StringLiteral e);
-  public void visit(Absyn.SubExpr e);
-  public void visit(Absyn.ThisExpr e);
-  public void visit(Absyn.ThreadDecl e);
-  public void visit(Absyn.TrueExpr e);
-  public void visit(Absyn.Type e);
-  public void visit(Absyn.VarDecl e);
-  public void visit(Absyn.VoidDecl e);
-  public void visit(Absyn.WhileStmt e);
-  public void visit(Absyn.XinuCallStmt e);
-  public void visit(Absyn.XinuCallExpr e);
+  public void visit(Semant.Absyn.Program e);
+  public void visit(Semant.Absyn.Stmt e);
+  public void visit(Semant.Absyn.StringLiteral e);
+  public void visit(Semant.Absyn.SubExpr e);
+  public void visit(Semant.Absyn.ThisExpr e);
+  public void visit(Semant.Absyn.ThreadDecl e);
+  public void visit(Semant.Absyn.TrueExpr e);
+  public void visit(Semant.Absyn.Type e);
+  public void visit(Semant.Absyn.VarDecl e);
+  public void visit(Semant.Absyn.VoidDecl e);
+  public void visit(Semant.Absyn.WhileStmt e);
+  public void visit(Semant.Absyn.XinuCallStmt e);
+  public void visit(Semant.Absyn.XinuCallExpr e);
+  
+  public void visit(Semant.Types.ARRAY a);
+	public void visit(Semant.Types.BOOLEAN a);
+	public void visit(Semant.Types.CLASS a);
+	public void visit(Semant.Types.FIELD a);
+	public void visit(Semant.Types.FUNCTION a);
+	public void visit(Semant.Types.INT a);
+	public void visit(Semant.Types.NIL a);
+	public void visit(Semant.Types.OBJECT a);
+	public void visit(Semant.Types.RECORD a);
+	public void visit(Semant.Types.STRING a);
+	public void visit(Semant.Types.VOID a);
  
 
 }// Visitor

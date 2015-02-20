@@ -38,11 +38,17 @@ ABSYN    = Semant/Absyn/Absyn.java Semant/Absyn/Expr.java \
 	Semant/Absyn/VoidDecl.java Semant/Absyn/WhileStmt.java \
 	Semant/Absyn/XinuCallExpr.java Semant/Absyn/XinuCallStmt.java
 
-VISIT    = Semant/Visit/Visitor.java \
-	Semant/Visit/Visitable.java \
-	Semant/Visit/PrintVisitor.java \
-	Semant/Visit/AbsynPrintVisitor.java 
-#	Semant/Visit/Interpreter.java
+VISIT    = Semant/Visit/Visitable.java Semant/Visit/Visitor.java \
+	Semant/Visit/IntVisitor.java Semant/Visit/PrintVisitor.java \
+	Semant/Visit/AbsynPrintVisitor.java \
+	Semant/Visit/Interpreter.java
+	
+TYPES	 = Semant/Types/ARRAY.java Semant/Types/BOOLEAN.java \
+	Semant/Types/CLASS.java Semant/Types/FIELD.java \
+	Semant/Types/FUNCTION.java Semant/Types/INT.java \
+	Semant/Types/NIL.java Semant/Types/OBJECT.java \
+	Semant/Types/RECORD.java Semant/Types/STRING.java \
+	Semant/Types/Type.java Semant/Types/VOID.java
 
 SRCS     = $(VISIT) $(ABSYN) $(PARSER).java Semant/Main.java
 

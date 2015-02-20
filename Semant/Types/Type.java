@@ -3,7 +3,7 @@ package Semant.Types;
 //import Semant.Visitable;
 //simport Semant.Visitor;
 
-public abstract class Type implements Visitable{
+public abstract class Type implements Semant.Visit.Visitable{
 	
 	public Type(){
 		
