@@ -8,6 +8,6 @@ class test {
 			Xinu.print("b >= c");
 	}
 }
-class cat {
-	int r;
+	class cat {
+		int r;
 }

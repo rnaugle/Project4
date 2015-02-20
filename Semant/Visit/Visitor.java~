@@ -17,7 +17,7 @@ public interface Visitor
  
   
   
-  public void visit(Absyn.Absyn a);
+  public void visit(Semant.Absyn.Absyn a);
   public void visit(Absyn.AddExpr e);
   public void visit(Absyn.AndExpr e);
   public void visit(Absyn.ArrayExpr e);

@@ -6,6 +6,7 @@ JAVACC   = javacc
 JJDOC    = jjdoc
 
 JAVACC_FLAGS = -NOSTATIC
+JAVAC_FLAGS = -Xdepend
 
 JAVACCGEN = SimpleCharStream.java ParseException.java \
         $(PARSER).java $(PARSER)Constants.java \
@@ -37,17 +38,18 @@ ABSYN    = Semant/Absyn/Absyn.java Semant/Absyn/Expr.java \
 	Semant/Absyn/VoidDecl.java Semant/Absyn/WhileStmt.java \
 	Semant/Absyn/XinuCallExpr.java Semant/Absyn/XinuCallStmt.java
 
-VISIT    = Semant/Visit/Visitable.java Semant/Visit/Visitor.java \
-	Semant/Visit/IntVisitor.java Semant/Visit/PrintVisitor.java \
-	Semant/Visit/AbsynPrintVisitor.java \
-	Semant/Visit/Interpreter.java
+VISIT    = Semant/Visit/Visitor.java \
+	Semant/Visit/Visitable.java \
+	Semant/Visit/PrintVisitor.java \
+	Semant/Visit/AbsynPrintVisitor.java 
+#	Semant/Visit/Interpreter.java
 
-SRCS     = $(ABSYN) $(VISIT) $(PARSER).java Main.java
+SRCS     = $(VISIT) $(ABSYN) $(PARSER).java Semant/Main.java
 
 all:  $(SRCS:.java=.class)
 
 %.class : %.java
-	$(JAVAC) $<
+	$(JAVAC) $(JAVAC_FLAGS) $<
 
 
 
