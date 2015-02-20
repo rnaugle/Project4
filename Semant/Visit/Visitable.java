@@ -1,4 +1,4 @@
-package Visit;
+package Semant.Visit;
 
 /**
  * Visitable.java

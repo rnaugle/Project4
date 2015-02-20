@@ -1,4 +1,4 @@
-package Absyn;
+package Semant.Absyn;
 
 public abstract class Absyn implements Semant.Visit.Visitable{
 

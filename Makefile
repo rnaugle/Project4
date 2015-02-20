@@ -41,6 +41,14 @@ VISIT    = Semant/Visit/Visitable.java Semant/Visit/Visitor.java \
 	Semant/Visit/IntVisitor.java Semant/Visit/PrintVisitor.java \
 	Semant/Visit/AbsynPrintVisitor.java \
 	Semant/Visit/Interpreter.java
+	
+TYPES	 = Semant/Types/ARRAY.java Semant/Types/BOOLEAN.java \
+	Semant/Types/CLASS.java Semant/Types/FIELD.java \
+	Semant/Types/FUNCTION.java Semant/Types/INT.java \
+	Semant/Types/NIL.java Semant/Types/OBJECT.java \
+	Semant/Types/RECORD.java Semant/Types/STRING.java \
+	Semant/Types/Type.java Semant/Types/VOID.java \
+	
 
 SRCS     = $(ABSYN) $(VISIT) $(PARSER).java Main.java
 
