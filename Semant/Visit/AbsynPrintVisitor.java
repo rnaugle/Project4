@@ -590,6 +590,40 @@ public class AbsynPrintVisitor implements Visitor
       out.println(")");
   }
   
+  public void visit(Types.ARRAY a){
+	  ;
+  }
+	public void visit(Types.BOOLEAN a){
+		  ;
+	  }
+	public void visit(Types.CLASS a){
+		  ;
+	  }
+	public void visit(Types.FIELD a){
+		  ;
+	  }
+	public void visit(Types.FUNCTION a){
+		  ;
+	  }
+	public void visit(Types.INT a){
+		  ;
+	  }
+	public void visit(Types.NIL a){
+		  ;
+	  }
+	public void visit(Types.OBJECT a){
+		  ;
+	  }
+	public void visit(Types.RECORD a){
+		  ;
+	  }
+	public void visit(Types.STRING a){
+		  ;
+	  }
+	public void visit(Types.VOID a){
+		  ;
+	  }
+  
 
 }// Visitor
 
