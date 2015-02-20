@@ -10,5 +10,5 @@ public class BooleanType extends Type{
 	public String toString()
 	  {   return "";   }
 	
-	 public void accept(Visit.Visitor v)      {          v.visit(this);   }
+	 public void accept(Semant.Visit.Visitor v)      {          v.visit(this);   }
 }

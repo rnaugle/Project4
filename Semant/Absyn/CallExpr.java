@@ -16,5 +16,5 @@ public class CallExpr extends Expr{
 	 public String toString()
 	  {   return "";   }
 	
-	 public void accept(Visit.Visitor v)      {          v.visit(this);   }
+	 public void accept(Semant.Visit.Visitor v)      {          v.visit(this);   }
 }
