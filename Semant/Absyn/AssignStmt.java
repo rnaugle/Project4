@@ -1,7 +1,7 @@
 package Semant.Absyn;
 
 public class AssignStmt extends Stmt{
-	public AssignableExpr lhs; Expr rhs;
+	public AssignableExpr lhs; public Expr rhs;
 	public AssignStmt(AssignableExpr e1, Expr e2){
 		lhs = e1;
 		rhs = e2;

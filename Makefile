@@ -39,7 +39,6 @@ ABSYN    = Semant/Absyn/Absyn.java Semant/Absyn/Expr.java \
 	Semant/Absyn/XinuCallExpr.java Semant/Absyn/XinuCallStmt.java
 
 VISIT    = Semant/Visit/Visitable.java Semant/Visit/Visitor.java \
-	Semant/Visit/IntVisitor.java Semant/Visit/PrintVisitor.java \
 	Semant/Visit/AbsynPrintVisitor.java \
 	Semant/Visit/Interpreter.java
 	

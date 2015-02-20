@@ -8,7 +8,7 @@ public class BOOLEAN extends Type {
 	}
 
 	@Override
-	public void accept(Visitor v) {
+	public void accept(Semant.Visit.Visitor v) {
 		// TODO Auto-generated method stub
 		
 	}

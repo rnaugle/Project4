@@ -49,7 +49,7 @@ public interface Visitor
   
   public void visit(Semant.Absyn.NullExpr e);
   public void visit(Semant.Absyn.OrExpr e);
-  public void visit(Semant.Absyn.PrintVisitor e);
+  //public void visit(Semant.Absyn.PrintVisitor e);
   
   public void visit(Semant.Absyn.Program e);
   public void visit(Semant.Absyn.Stmt e);
