@@ -86,7 +86,10 @@ public class Main {
     		for(FIELD parentfields : parent.fields){
     			c1.fields.put(parentfields.type, parentfields.name);
     		}
+    		
     	}
+    	
+    	//OBJECT instance = new OBJECT(c1, );
     	
     }
 	
