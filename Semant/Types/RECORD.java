@@ -10,7 +10,7 @@ public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 		
 	}
 	
-	public FIELD get(String name){
+	public FIELD get(Semant.Symbol.Symbol name){
 		return null;
 	}
 	
@@ -19,7 +19,7 @@ public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 		
 	}
 	
-	public FIELD put(Type type, String name){
+	public FIELD put(Type type, Semant.Symbol.Symbol name){
 		return null;
 		
 	}

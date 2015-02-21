@@ -48,7 +48,9 @@ TYPES	 = Semant/Types/ARRAY.java Semant/Types/BOOLEAN.java \
 	Semant/Types/RECORD.java Semant/Types/STRING.java \
 	Semant/Types/Type.java Semant/Types/VOID.java
 
-SRCS     = $(TYPES) $(VISIT) $(ABSYN) $(PARSER).java Semant/Main.java
+SYMBOL	= Semant/Symbol/Symbol.java Semant/Symbol/Table.java
+
+SRCS     = $(SYMBOL) $(TYPES) $(VISIT) $(ABSYN) $(PARSER).java Semant/Main.java
 
 all:  $(SRCS:.java=.class)
 

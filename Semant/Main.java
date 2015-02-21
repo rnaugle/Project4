@@ -1,5 +1,6 @@
 package Semant;
-
+import Semant.Types.*;
+import Semant.Symbol.*;
 public class Main {
 	public static void main(String[] args)
  {
@@ -20,6 +21,13 @@ public class Main {
         System.out.println(p.toString());
         System.exit(-1);
       }
+    Table tb = new Table();
+    for(Semant.Absyn.ClassDecl cd : pm.classes){
+    	CLASS cl = new CLASS(Symbol.symbol(cd.name));
+    	RECORD methods = new RECORDS
+    	
+    }
+	
 
     // Print Visitor
     //     System.out.println("Input String:");
