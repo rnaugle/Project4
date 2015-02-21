@@ -21,7 +21,35 @@ public class Main {
         System.out.println(p.toString());
         System.exit(-1);
       }
+    
     Table tb = new Table();
+    
+    
+    java.util.LinkedList<FIELD> f = new java.util.LinkedList<FIELD>();
+    FIELD print = new FIELD( new FUNCTION(Symbol.symbol("print"),null, null, null), 0, Symbol.symbol("print"));
+    FIELD println = new FIELD( new FUNCTION(Symbol.symbol("println"),null, null, null), 0, Symbol.symbol("println"));
+    FIELD printint = new FIELD( new FUNCTION(Symbol.symbol("printint"),null, null, null), 0, Symbol.symbol("printint"));
+    FIELD readint = new FIELD( new FUNCTION(Symbol.symbol("readint"),null, null, null), 0, Symbol.symbol("readint"));
+    FIELD threadCreate = new FIELD( new FUNCTION(Symbol.symbol("threadCreate"),null, null, null), 0, Symbol.symbol("threadCreate"));
+    FIELD yield = new FIELD( new FUNCTION(Symbol.symbol("yield"),null, null, null), 0, Symbol.symbol("yield"));
+    FIELD sleep = new FIELD( new FUNCTION(Symbol.symbol("sleep"),null, null, null), 0, Symbol.symbol("sleep"));
+    f.add(print);
+    f.add(println);
+    f.add(printint);
+    f.add(readint);
+    f.add(threadCreate);
+    f.add(yield);
+    f.add(sleep);
+    RECORD xinuMethods = new RECORD(f);
+    CLASS xinu = new CLASS(Symbol.symbol("Xinu"));
+    xinu.methods = xinuMethods;
+    xinu.parent = null;
+    xinu.fields = null;
+    xinu.instance = null;
+    
+    
+    
+    
     for(Semant.Absyn.ClassDecl cd : pm.classes){
     	CLASS c1 = new CLASS(Symbol.symbol(cd.name));
     	RECORD methods = new RECORD();
@@ -37,6 +65,29 @@ public class Main {
     	c1.parent = null;
     	c1.instance = null;
     	tb.put(c1.name, c1);
+    }
+    
+    for(Semant.Absyn.ClassDecl cd : pm.classes){
+    	CLASS c1 = (CLASS)tb.get(Symbol.symbol(cd.name));
+    	Object p1 = tb.get(Symbol.symbol(cd.parent));
+    	if(!(p1 instanceof CLASS)){
+    		//print error
+    		return;
+    	}
+    	CLASS parent = (CLASS) p1;
+    	if(parent == null){
+    		//print error
+    		return;
+    	}else{
+    		c1.parent = parent;
+    		for(FIELD parentmethods : parent.methods){
+    			c1.methods.put(parentmethods.type, parentmethods.name);
+    		}
+    		for(FIELD parentfields : parent.fields){
+    			c1.fields.put(parentfields.type, parentfields.name);
+    		}
+    	}
+    	
     }
 	
 
