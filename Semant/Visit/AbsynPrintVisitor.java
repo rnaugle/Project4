@@ -667,7 +667,7 @@ public class AbsynPrintVisitor implements Visitor
       out.print(")");
 
       indent -= 2;   // printIndent();
-      out.println(")");
+      out.print(")");
   }
   public void visit(Semant.Absyn.XinuCallStmt e)
   {
