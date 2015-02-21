@@ -19,8 +19,11 @@ public class ARRAY extends Type  {
 	@Override
 	public
 	boolean coerceTo(Type t) {
-		// TODO Auto-generated method stub
+		if( t.getClass().getName() == element.getClass().getName() ){
+			return true;
+		}
 		return false;
+
 	}
 
 	@Override

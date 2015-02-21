@@ -7,10 +7,10 @@ public class CLASS extends Type{
 	public RECORD fields;
 	public OBJECT instance;
 	public RECORD methods;
-	public String name;
+	public Semant.Symbol.Symbol name;
 	public CLASS parent;
 	
-	public CLASS(String s){
+	public CLASS(Semant.Symbol.Symbol s){
 		this.name = s;
 		
 	}

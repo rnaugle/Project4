@@ -13,6 +13,9 @@ public class VOID extends Type{
 	@Override
 	public boolean coerceTo(Type t) {
 		// TODO Auto-generated method stub
+		if( t.getClass().getName() == this.getClass().getName() ){
+			return true;
+		}
 		return false;
 	}
 
