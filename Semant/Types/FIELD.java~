@@ -1,10 +1,10 @@
 package Semant.Types;
 
-import Semant.Visitor;
+//import Semant.Visitor;
 
 public class FIELD extends Type{
 	public int index;
-	public String name;
+	public Symbol name;
 	public Type type;
 	
 	public FIELD(Type t, int i, String n){
@@ -14,7 +14,7 @@ public class FIELD extends Type{
 	}
 
 	@Override
-	public void accept(Visitor v) {
+	public void accept(Semant.Visit.Visitor v) {
 		// TODO Auto-generated method stub
 		
 	}

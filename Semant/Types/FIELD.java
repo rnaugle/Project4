@@ -4,10 +4,10 @@ package Semant.Types;
 
 public class FIELD extends Type{
 	public int index;
-	public String name;
+	public Symbol name;
 	public Type type;
 	
-	public FIELD(Type t, int i, String n){
+	public FIELD(Type t, int i, Symbol n){
 		this.index = i;
 		this.name = n;
 		this.type = t;
