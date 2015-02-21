@@ -14,7 +14,10 @@ public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 	}
 	
 	public FIELD get(Symbol name){
-		return tb.get(name);
+		if (tb.get(name) instanceof FIELD)
+			return tb.get(name);
+		else	
+			return null;
 	}
 	
 	public Iterator<FIELD> iterator(){
