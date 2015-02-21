@@ -5,24 +5,28 @@ import java.util.Iterator;
 //import Semant.Visitor;
 
 public class RECORD extends Type implements java.lang.Iterable<FIELD>{
-	java.util.LinkedList<FIELDS> fields;
+	java.util.LinkedList<FIELD> fields;
+	int counter;
 
-	public RECORD(java.util.LinkedList<FIELDS> f){
-		this.fields = f;
+	public RECORD(){
+		this.fields = new java.util.LinkedList<FIELD>();
+		counter = 0;
 	}
 	
 	public FIELD get(Symbol name){
-		return null;
+		return tb.get(name);
 	}
 	
 	public Iterator<FIELD> iterator(){
-		return null;
+		
+		return fields.descendingIterator();
 		
 	}
 	
 	public FIELD put(Type type, Symbol name){
-		return null;
-		
+		tb.put(name,type);
+		FIELD field = new FIELD(type,counter++,name);
+		return field;
 	}
 
 	@Override
