@@ -1,9 +1,9 @@
 package Semant.Symbol;
 
 class Bucket {
-	Symbol key; 
-	Object binding;
-	Bucket next;
+	public Symbol key; 
+	public Object binding;
+	public Bucket next;
 	
 	Bucket(Symbol s, Object o, Bucket b){
 		key = s;
@@ -26,24 +26,25 @@ public class Table{
 	}
 	
 	public void put(Symbol key, Object value){
-		int i = hash(s)%256;
+		int i = hash(key)%256;
 		this.table[i] = new Bucket(key, value, this.table[i]);
 	}
 
 	public Object get(Symbol key){
 		int i = hash(key)%256;
-		for (Bucket b = table[i]; b != null; b = b.next)
+		for (Bucket b = table[i]; b != null; b = b.next){
 			if (key.toString().equals(b.key.toString()))
 				return b.binding;
 			if (b.key.toString().equals("_"))
 				return null;
+		}
 		return null;
 
 	}
 
 	public void beginScope(){
 		for (int i = 0; i < 256; i++)
-			this.table[i] = new Bucket(new Symbol("_"),null,this.table[i]);	
+			this.table[i] = new Bucket(Symbol.symbol("_"),null,this.table[i]);	
 
 	}
 	public void endScope(){
@@ -60,9 +61,9 @@ public class Table{
 	}
 
 
-	public java.util.Enumeration keys(){
+	//public java.util.Enumeration keys(){
 		
 
-	}
+	//}
 
 }

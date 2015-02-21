@@ -5,18 +5,18 @@ package Semant.Types;
 public class FUNCTION extends Type{
 	
 	public RECORD formals;
-	public String name;
+	public Semant.Symbol.Symbol name;
 	public Type result;
 	public Type self;
 	
-	public FUNCTION(String n, Type s, RECORD f, Type r){
+	public FUNCTION(Semant.Symbol.Symbol n, Type s, RECORD f, Type r){
 		this.name = n;
 		this.formals = f;
 		this.result = r;
 		this.self = s;
 	}
 	
-	public FIELD addFormal(Type type, String n){
+	public FIELD addFormal(Type type, Semant.Symbol.Symbol n){
 		;
 		return null;
 	}
