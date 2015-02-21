@@ -31,8 +31,8 @@ public class Main {
     //                         System.out.println("Abstract Syntax Tree:");
             Semant.Visit.AbsynPrintVisitor apv = new Semant.Visit.AbsynPrintVisitor();
             apv.visit(pm);
-            System.out.println();
-            System.out.println();
+     //       System.out.println();
+     //       System.out.println();
     //        System.out.println("Interpreter:");
     //        Visit.Interpreter interp = new Visit.Interpreter();
            // System.out.println(interp.visit(g));
