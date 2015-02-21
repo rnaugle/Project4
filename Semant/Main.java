@@ -3,7 +3,7 @@ package Semant;
 public class Main {
 	public static void main(String[] args)
  {
-    Absyn.Program pm = null;
+    Semant.Absyn.Program pm = null;
     java.util.LinkedList c = null;
 	
     try
@@ -29,12 +29,12 @@ public class Main {
     //                    System.out.println();
     
     //                         System.out.println("Abstract Syntax Tree:");
-            Visit.AbsynPrintVisitor apv = new Visit.AbsynPrintVisitor();
+            Semant.Visit.AbsynPrintVisitor apv = new Semant.Visit.AbsynPrintVisitor();
             apv.visit(pm);
-            System.out.println();
-            System.out.println();
+     //       System.out.println();
+     //       System.out.println();
     //        System.out.println("Interpreter:");
     //        Visit.Interpreter interp = new Visit.Interpreter();
-            System.out.println(interp.visit(g));
+           // System.out.println(interp.visit(g));
     }
 }  //Main
