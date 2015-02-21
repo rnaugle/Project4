@@ -31,12 +31,14 @@ public class AbsynPrintVisitor implements Visitor
   {
     out.println("Program(");
     indent += 2;    printIndent();
-    out.println("AbstractList(");
-    indent += 2;    printIndent();
+    out.print("AbstractList(");
+    indent += 2;    //printIndent();
     //TODO handle Lists
     //g.classes.accept(this);
     for(Semant.Absyn.ClassDecl c : g.classes){
-    	c.accept(this);
+    	out.println();
+	printIndent();
+	c.accept(this);
     }
 
     indent -= 2;
@@ -154,8 +156,13 @@ public class AbsynPrintVisitor implements Visitor
   public void visit(Semant.Absyn.AssignStmt e)
   {
 	  out.println("AssignStmt(");
+		indent+=2;
+		printIndent();
 	  e.lhs.accept(this);
+		out.println();
+		printIndent();
 	  e.rhs.accept(this);
+		indent-=2;
 	  out.print(")");
   }
   public void visit(Semant.Absyn.BinOpExpr e)
@@ -190,19 +197,25 @@ public class AbsynPrintVisitor implements Visitor
 
   public void visit(Semant.Absyn.CallExpr e)
   {
-	  out.print("CallExpr(");
+	  out.println("CallExpr(");
 	  indent += 2;    
 	    printIndent();
 	  e.target.accept(this);
 	  //e.rhs.accept(this);
-	  out.println(e.method);
+	  out.println();
+		printIndent();
+	  out.print(e.method);
+	out.println();
+	printIndent();
 	  out.print("AbstractList(");
 	    indent += 2;    
-	    printIndent();
+	    //printIndent();
 	    
 	    
 	  for(Semant.Absyn.Expr c : e.args){
-	    	c.accept(this);
+	    	out.println();
+		printIndent();
+		c.accept(this);
 	    }
 	  
 	  indent -= 2;
@@ -213,7 +226,7 @@ public class AbsynPrintVisitor implements Visitor
 	    indent -= 2;    
 	    
 	  out.print(")");
-	  printIndent();
+	 // printIndent();
   }
   public void visit(Semant.Absyn.ClassDecl e)
   {
@@ -249,11 +262,11 @@ public class AbsynPrintVisitor implements Visitor
 	    }
 	  
 	  indent -= 2;
-	  printIndent();
+	  //printIndent();
 	    out.print(")");
 	    
 	    indent -= 2;
-		  printIndent();
+	//	  printIndent();
 	    
 	  out.print(")");
   }
@@ -402,14 +415,14 @@ public class AbsynPrintVisitor implements Visitor
 	printIndent();
 	    
 
-	    if(e.returnVal != null){
+	   // if(e.returnVal != null){
 	    	e.returnVal.accept(this);
-	    }else{
-		Semant.Absyn.IntegerLiteral zero = new Semant.Absyn.IntegerLiteral(0);
-		//TODO NOT SURE HERE
-		e.returnVal = zero;
-		e.returnVal.accept(this);
-	    } 
+	    //}else{
+	//	Semant.Absyn.IntegerLiteral zero = new Semant.Absyn.IntegerLiteral(0);
+	//	//TODO NOT SURE HERE
+	//	e.returnVal = zero;
+	//	e.returnVal.accept(this);
+	  //  } 
 
 
 	    
@@ -426,7 +439,7 @@ public class AbsynPrintVisitor implements Visitor
       
       e.e1.accept(this);
       
-      indent -= 2;    printIndent();
+      indent -= 2;   printIndent();
       out.println(")");
       
   }
@@ -451,13 +464,13 @@ public class AbsynPrintVisitor implements Visitor
   }
   public void visit(Semant.Absyn.NewObjectExpr e)
   {
-      out.println("NewObjectExpr(");
-      indent += 2;    printIndent();
+      out.print("NewObjectExpr(");
+      indent += 2;//    printIndent();
       
       e.type.accept(this);
       
-      indent -= 2;    printIndent();
-      out.println(")");
+      indent -= 2;  //  printIndent();
+      out.print(")");
   }
   public void visit(Semant.Absyn.NotEqExpr e)
   {
@@ -510,30 +523,37 @@ public class AbsynPrintVisitor implements Visitor
   }
   public void visit(Semant.Absyn.ThreadDecl e)
   {
-      out.print("ThreadDecl("+ e.name+ "Thread");
-      indent += 2;    printIndent();
+      out.println("ThreadDecl("+ e.name+ " Thread");
+      indent += 2;    
+	
+	printIndent();
       
-      out.println("AbstractList(");
-      indent += 2;    printIndent();
+      out.print("AbstractList(");
+      indent += 2; //   printIndent();
       
       for(Semant.Absyn.VarDecl v : e.fields){
-        v.accept(this);
+       
+	out.println();
+	 printIndent();
+	v.accept(this);
       }
-      indent -= 2;    printIndent();
+      indent -= 2;    //printIndent();
       out.println(")");
-      
-      out.println("AbstractList(");
-      indent += 2;    printIndent();
+      printIndent();
+      out.print("AbstractList(");
+      indent += 2; // printIndent();
       
       for(Semant.Absyn.MethodDecl v : e.methods){
-        v.accept(this);
+        out.println();
+	printIndent();
+	v.accept(this);
       }
     
-      indent -= 2;    printIndent();
+      indent -= 2;    //printIndent();
       out.print(")");
       
-      indent -= 2;    printIndent();
-      out.println(")");
+      indent -= 2;    //printIndent();
+      out.print(")");
   }
   public void visit(Semant.Absyn.TrueExpr e)
   {
@@ -547,12 +567,17 @@ public class AbsynPrintVisitor implements Visitor
   {
       out.print("VarDecl(");
       e.type.accept(this);
-      out.println(" "+ e.name);
-      indent += 2;    printIndent();
-      
+      out.print(" "+ e.name);
+      //indent += 2;  //  printIndent();
+     if(e.init != null){
+	out.println();
+	printIndent(); 
       e.init.accept(this);
+	}else{
+		out.print(" null");
+	}
       
-      indent -= 2;    //printIndent();
+    //  indent -= 2;    //printIndent();
       out.print(")");
   }
   public void visit(Semant.Absyn.VoidDecl e)
@@ -560,28 +585,32 @@ public class AbsynPrintVisitor implements Visitor
     out.println("VoidDecl("+ e.name);
     indent += 2;    printIndent();
     
-    out.println("AbstractList(");
-    indent += 2;    printIndent();
+    out.print("AbstractList(");
+    indent += 2;   // printIndent();
     
     for(Semant.Absyn.VarDecl v : e.locals){
-        v.accept(this);
+        out.println();
+	printIndent();
+	v.accept(this);
     }
     
-    indent -= 2;    printIndent();
+    indent -= 2;   // printIndent();
     out.println(")");
-    
-    out.println("AbstractList(");
-    indent += 2;    printIndent();
+    printIndent(); 
+    out.print("AbstractList(");
+    indent += 2;  //  printIndent();
     
     for(Semant.Absyn.Stmt v : e.stmts){
-        v.accept(this);
+        out.println();
+	printIndent();
+	v.accept(this);
     }
     
-    indent -= 2;    printIndent();
+    indent -= 2;   // printIndent();
     out.print(")");
     
-    indent -= 2;    printIndent();
-    out.println(")");
+    indent -= 2;   // printIndent();
+    out.print(")");
   }
   public void visit(Semant.Absyn.WhileStmt e)
   {
@@ -627,8 +656,8 @@ public class AbsynPrintVisitor implements Visitor
       indent -= 2;
       out.print(")");
 
-      indent -= 2;    printIndent();
-      out.println(")");
+      indent -= 2;   // printIndent();
+      out.print(")");
   }
   
   public void visit(Semant.Types.ARRAY a){

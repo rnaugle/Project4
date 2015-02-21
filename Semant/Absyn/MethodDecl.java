@@ -20,6 +20,7 @@ public class MethodDecl extends Absyn{
 		this.params = params;
 		this.locals =  locals;
 		this.stmts = stmts;
+		this.returnVal = returnVal;
 		
 	}
 	
