@@ -2,7 +2,7 @@ package Semant.Types;
 
 import java.util.Iterator;
 
-import Semant.Visitor;
+//import Semant.Visitor;
 
 public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 	
@@ -10,7 +10,7 @@ public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 		
 	}
 	
-	public FIELD get(String name){
+	public FIELD get(Symbol name){
 		return null;
 	}
 	
@@ -19,13 +19,13 @@ public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 		
 	}
 	
-	public FIELD put(Type type, String name){
+	public FIELD put(Type type, Symbol name){
 		return null;
 		
 	}
 
 	@Override
-	public void accept(Visitor v) {
+	public void accept(Semant.Visit.Visitor v) {
 		// TODO Auto-generated method stub
 		
 	}
