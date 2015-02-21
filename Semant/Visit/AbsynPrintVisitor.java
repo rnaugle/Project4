@@ -142,7 +142,7 @@ public class AbsynPrintVisitor implements Visitor
   }
   public void visit(Semant.Absyn.ArrayType e)
   {
-	  out.println("ArrayType(");
+	  out.print("ArrayType(");
 	  e.base.accept(this);
 	  
 	  out.print(")");
@@ -228,20 +228,24 @@ public class AbsynPrintVisitor implements Visitor
 	    
 	    
 	  for(Semant.Absyn.VarDecl c : e.fields){
-	    	c.accept(this);
+	    	out.println();
+		printIndent();
+		c.accept(this);
 	    }
 	  
 	  indent -= 2;
 	    out.println(")");
 	    
 	    printIndent();
-	    out.println("AbstractList(");
+	    out.print("AbstractList(");
 	    indent += 2;    
-	    printIndent();
+	    //printIndent();
 	    
 	    
 	  for(Semant.Absyn.MethodDecl c : e.methods){
-	    	c.accept(this);
+	    	out.println();
+		printIndent();
+		c.accept(this);
 	    }
 	  
 	  indent -= 2;
@@ -278,9 +282,11 @@ public class AbsynPrintVisitor implements Visitor
   }
   public void visit(Semant.Absyn.Formal e)
   {
-	  out.println("Formal(");
+	  out.print("Formal(");
+		//indent+=2; printIndent();
 	  e.type.accept(this);
-	  out.println(" " + e.name + ")");
+		//indent-=2;
+	  out.print(" " + e.name + ")");
   }
   public void visit(Semant.Absyn.GreaterExpr e)
   {
@@ -326,58 +332,65 @@ public class AbsynPrintVisitor implements Visitor
   }
   public void visit(Semant.Absyn.MethodDecl e)
   {
-	  out.println("MethodDecl(");
+	  out.print("MethodDecl(");
 	  if(e.returnType == null){
-		  out.println("public_static_void");
+		  out.print("public_static_void");
 	  }else{
 		  e.returnType.accept(this);
 	  }
 	 
-	 out.print(" " + e.name);
+	 out.println(" " + e.name);
 	 indent += 2;    
 	    printIndent();
-	 out.println("AbstractList(");
+	 out.print("AbstractList(");
 	    indent += 2;    
-	    printIndent();
+	    //printIndent();
 	    
 	    
 	    if(e.params == null){
 	    	
 	    }else{
 	    	for(Semant.Absyn.Formal c : e.params){
-		    	c.accept(this);
+		    	out.println();
+			printIndent();
+			c.accept(this);
 		    }
 	    }
 	    
 	  
 	  
 	  indent -= 2;
-	  printIndent();
-	    out.print(")");
+	 // printIndent();
+	    out.println(")");
 	    
-	    out.println("AbstractList(");
+		printIndent();
+	    out.print("AbstractList(");
 	    indent += 2;    
-	    printIndent();
+	    //printIndent();
 	    
 	    if(e.locals != null){
 	    	for(Semant.Absyn.VarDecl c : e.locals){
-		    	c.accept(this);
+		    	out.println();
+			printIndent();
+			c.accept(this);
 		    }
 	    }
 	    
 	  
 	  
 	  indent -= 2;
-	  printIndent();
-	    out.print(")");
+	  out.println(")");
+	printIndent();
 	    
-	    out.println("AbstractList(");
+	    out.print("AbstractList(");
 	    indent += 2;    
-	    printIndent();
+	    //printIndent();
 	    
 	    if(e.stmts !=null){
 	    	for(Semant.Absyn.Stmt c : e.stmts){
-		    	c.accept(this);
+		    	out.println();
+			printIndent();
+			c.accept(this);
 		    }
 	    }
 	    
@@ -385,18 +398,23 @@ public class AbsynPrintVisitor implements Visitor
 	  
 	  
 	  indent -= 2;
-	  printIndent();
-	    out.print(")");
+	    out.println(")");
+	printIndent();
 	    
 
 	    if(e.returnVal != null){
 	    	e.returnVal.accept(this);
-	    }
-	    
+	    }else{
+		Semant.Absyn.IntegerLiteral zero = new Semant.Absyn.IntegerLiteral(0);
+		//TODO NOT SURE HERE
+		e.returnVal = zero;
+		e.returnVal.accept(this);
+	    } 
+
 
 	    
 	    indent -= 2;
-		  printIndent();
+		 // printIndent();
 	    
 	  out.print(")");
 	  
@@ -428,7 +446,6 @@ public class AbsynPrintVisitor implements Visitor
       
       indent -= 2;
       out.print(")");
-      
       indent -= 2;    printIndent();
       out.println(")");
   }
@@ -535,8 +552,8 @@ public class AbsynPrintVisitor implements Visitor
       
       e.init.accept(this);
       
-      indent -= 2;    printIndent();
-      out.println(")");
+      indent -= 2;    //printIndent();
+      out.print(")");
   }
   public void visit(Semant.Absyn.VoidDecl e)
   {
