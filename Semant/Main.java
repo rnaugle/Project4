@@ -23,9 +23,20 @@ public class Main {
       }
     Table tb = new Table();
     for(Semant.Absyn.ClassDecl cd : pm.classes){
-    	CLASS cl = new CLASS(Symbol.symbol(cd.name));
-    	RECORD methods = new RECORDS
-    	
+    	CLASS c1 = new CLASS(Symbol.symbol(cd.name));
+    	RECORD methods = new RECORD();
+    	for(Semant.Absyn.MethodDecl md : cd.methods){
+    		methods.put(new FUNCTION(Symbol.symbol(md.name),null, new RECORD(), null), Symbol.symbol(md.name));
+    	}
+    	c1.methods = methods;
+    	RECORD fields = new RECORD();
+    	for(Semant.Absyn.VarDecl vd : cd.fields){
+    		fields.put(null, Symbol.symbol(vd.name));
+    	}
+    	c1.fields = fields;
+    	c1.parent = null;
+    	c1.instance = null;
+    	tb.put(c1.name, c1);
     }
 	
 
