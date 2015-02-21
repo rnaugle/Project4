@@ -1,12 +1,12 @@
 package Semant.Absyn;
 
 public class IfStmt extends Stmt{
-	public Expr testl;
+	public Expr test1;
 	public Stmt thenStmt;
 	public Stmt elseStmt;
 	
 	public IfStmt(Expr test1, Stmt y, Stmt u){
-		this.testl = test1;
+		this.test1 = test1;
 		this.thenStmt = y;
 		this.elseStmt = u;
 	}

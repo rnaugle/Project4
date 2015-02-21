@@ -163,9 +163,9 @@ SKIP :
  **************************************************/
 
 //Program(AbstractList<ClassDecl> classes)
-Absyn.Program Program () :
+Semant.Absyn.Program Program () :
 {
-    LinkedList<Absyn.ClassDecl> cl = new LinkedList<Absyn.ClassDecl>();
+    LinkedList<Semant.Absyn.ClassDecl> cl = new LinkedList<Semant.Absyn.ClassDecl>();
 }
 {
     "Program" "("
@@ -173,17 +173,17 @@ Absyn.Program Program () :
 	")"
     ")"
     <EOF>
-    { return new Absyn.Program(cl); }
+    { return new Semant.Absyn.Program(cl); }
 }
 
 
 //ClassDecl(String name, String parent, LinkedList<VarDecl> fields, LinkedList<MethodDecl> methods)
-void ClassDecl(LinkedList<Absyn.ClassDecl> cl) :
+void ClassDecl(LinkedList<Semant.Absyn.ClassDecl> cl) :
 {
 	Token name = null, parent = null;
 	String parentName;
-	LinkedList<Absyn.VarDecl> vl = new LinkedList<Absyn.VarDecl>();
-	LinkedList<Absyn.MethodDecl> ml = new LinkedList<Absyn.MethodDecl>();
+	LinkedList<Semant.Absyn.VarDecl> vl = new LinkedList<Semant.Absyn.VarDecl>();
+	LinkedList<Semant.Absyn.MethodDecl> ml = new LinkedList<Semant.Absyn.MethodDecl>();
 }
 {
 	"ClassDecl" "(" name = <ID> 
@@ -197,16 +197,16 @@ void ClassDecl(LinkedList<Absyn.ClassDecl> cl) :
 	{
 		if (null == parent) parentName = null;
 		else parentName = parent.toString();
-		cl.add(new Absyn.ClassDecl(name.toString(), parentName, vl, ml));
+		cl.add(new Semant.Absyn.ClassDecl(name.toString(), parentName, vl, ml));
 	}
 }
 
 //ThreadDecl(String name, LinkedList<VarDecl> fields, LinkedList<MethodDecl> methods)
-void ThreadDecl(LinkedList<Absyn.ClassDecl> cl) :
+void ThreadDecl(LinkedList<Semant.Absyn.ClassDecl> cl) :
 {
 	Token name = null;
-	LinkedList<Absyn.VarDecl> vl = new LinkedList<Absyn.VarDecl>();
-	LinkedList<Absyn.MethodDecl> ml = new LinkedList<Absyn.MethodDecl>();
+	LinkedList<Semant.Absyn.VarDecl> vl = new LinkedList<Semant.Absyn.VarDecl>();
+	LinkedList<Semant.Absyn.MethodDecl> ml = new LinkedList<Semant.Absyn.MethodDecl>();
 }
 {
 	"ThreadDecl" "(" name = <ID> "Thread"
@@ -217,7 +217,7 @@ void ThreadDecl(LinkedList<Absyn.ClassDecl> cl) :
 	       ")"
 	")"
 	{
-		cl.add(new Absyn.ThreadDecl(name.toString(), vl, ml));
+		cl.add(new Semant.Absyn.ThreadDecl(name.toString(), vl, ml));
 	}
 }
 
@@ -226,17 +226,17 @@ void ThreadDecl(LinkedList<Absyn.ClassDecl> cl) :
 //		      LinkedList<VarDecl> locals,
 //		      LinkedList<Stmt> stmts,
 //		      Expr returnVal)
-void MethodDecl(LinkedList<Absyn.MethodDecl> ml) :
+void MethodDecl(LinkedList<Semant.Absyn.MethodDecl> ml) :
 {
-	Absyn.Type type = null;
+	Semant.Absyn.Type type = null;
 	Token name;
-	Absyn.Formal  param = null;
-	Absyn.Stmt    stmt  = null;
-	Absyn.Expr    expr  = null;
+	Semant.Absyn.Formal  param = null;
+	Semant.Absyn.Stmt    stmt  = null;
+	Semant.Absyn.Expr    expr  = null;
 	boolean sync = false;
-	LinkedList<Absyn.Formal> params   = new LinkedList<Absyn.Formal>();
-	LinkedList<Absyn.VarDecl> locals  = new LinkedList<Absyn.VarDecl>();
-	LinkedList<Absyn.Stmt> stmts      = new LinkedList<Absyn.Stmt>();
+	LinkedList<Semant.Absyn.Formal> params   = new LinkedList<Semant.Absyn.Formal>();
+	LinkedList<Semant.Absyn.VarDecl> locals  = new LinkedList<Semant.Absyn.VarDecl>();
+	LinkedList<Semant.Absyn.Stmt> stmts      = new LinkedList<Semant.Absyn.Stmt>();
 }
 {
 	"MethodDecl" "("
@@ -251,19 +251,19 @@ void MethodDecl(LinkedList<Absyn.MethodDecl> ml) :
 	     ")"
 	     expr = Expr()
 	")"
-		{ ml.add(new Absyn.MethodDecl(type, sync, name.toString(),
+		{ ml.add(new Semant.Absyn.MethodDecl(type, sync, name.toString(),
 	  	     			    params, locals, stmts, expr)); }
 }
 
 //VoidDecl(String name,
 //		      LinkedList<VarDecl> locals,
 //		      LinkedList<Stmt> stmts)
-void VoidDecl(LinkedList<Absyn.MethodDecl> ml) :
+void VoidDecl(LinkedList<Semant.Absyn.MethodDecl> ml) :
 {
 	Token name;
-	Absyn.Stmt    stmt  = null;
-	LinkedList<Absyn.VarDecl> locals  = new LinkedList<Absyn.VarDecl>();
-	LinkedList<Absyn.Stmt> stmts      = new LinkedList<Absyn.Stmt>();
+	Semant.Absyn.Stmt    stmt  = null;
+	LinkedList<Semant.Absyn.VarDecl> locals  = new LinkedList<Semant.Absyn.VarDecl>();
+	LinkedList<Semant.Absyn.Stmt> stmts      = new LinkedList<Semant.Absyn.Stmt>();
 }
 {
 	"VoidDecl" "("
@@ -273,28 +273,28 @@ void VoidDecl(LinkedList<Absyn.MethodDecl> ml) :
 	     "AbstractList" "("	( stmt  = Stmt() { stmts.add(stmt); } )*
 	     ")"
 	")"
-	{ ml.add(new Absyn.VoidDecl(name.toString(), locals, stmts)); }
+	{ ml.add(new Semant.Absyn.VoidDecl(name.toString(), locals, stmts)); }
 }
 
 //Formal(Type type, String name)
-Absyn.Formal Formal() :
+Semant.Absyn.Formal Formal() :
 {
-	Absyn.Type type;
+	Semant.Absyn.Type type;
 	Token name;
 }
 {
 	"Formal" "("
 	type = Type() name = <ID>
 	")"
-	{ return new Absyn.Formal(type, name.image); }
+	{ return new Semant.Absyn.Formal(type, name.image); }
 }
 
 //VarDecl(Type type, String name, Expr init)
-void VarDecl(LinkedList<Absyn.VarDecl> vl) :
+void VarDecl(LinkedList<Semant.Absyn.VarDecl> vl) :
 {
-	Absyn.Type type;
+	Semant.Absyn.Type type;
 	Token name;
-	Absyn.Expr init = null;
+	Semant.Absyn.Expr init = null;
 }
 {
 	"VarDecl" "("
@@ -304,12 +304,12 @@ void VarDecl(LinkedList<Absyn.VarDecl> vl) :
 	{ 
 	//TODO: new field with the return type (maybe?)
 	//	Types returnType = findReturnType(type)
-	vl.add(new Absyn.VarDecl(type, name.image, init)); }
+	vl.add(new Semant.Absyn.VarDecl(type, name.image, init)); }
 }
 
-Absyn.Type Type() : 
+Semant.Absyn.Type Type() : 
 {
- Absyn.Type t;
+ Semant.Absyn.Type t;
 }
 {
    (LOOKAHEAD(ArrayType())      t = ArrayType()   |
@@ -322,42 +322,42 @@ Absyn.Type Type() :
 }
 
 // ArrayType(Type base)
-Absyn.Type ArrayType() :
-{ Absyn.Type t; }
+Semant.Absyn.Type ArrayType() :
+{ Semant.Absyn.Type t; }
 {
 	"ArrayType" "(" t = Type()
 	")"
-	{ return new Absyn.ArrayType(t); }
+	{ return new Semant.Absyn.ArrayType(t); }
 }
 
 // BooleanType() { }
-Absyn.Type BooleanType() :
+Semant.Absyn.Type BooleanType() :
 {}
 {
 	"BooleanType"
-	{ return new Absyn.BooleanType(); }
+	{ return new Semant.Absyn.BooleanType(); }
 }
 
 // IntegerType() { }
-Absyn.Type IntegerType() :
+Semant.Absyn.Type IntegerType() :
 {}
 {
 	"IntegerType"
-	{ return new Absyn.IntegerType(); }
+	{ return new Semant.Absyn.IntegerType(); }
 }
 
 // IdentifierType(String id)
-Absyn.Type IdentifierType() :
+Semant.Absyn.Type IdentifierType() :
 { Token t; }
 {
 	"IdentifierType" "(" t = <ID>
 	")"
-	{ return new Absyn.IdentifierType(t.image); }
+	{ return new Semant.Absyn.IdentifierType(t.image); }
 }
 
-Absyn.Stmt Stmt() : 
+Semant.Absyn.Stmt Stmt() : 
 {
-	Absyn.Stmt s;
+	Semant.Absyn.Stmt s;
 }
 {
    (
@@ -371,23 +371,23 @@ Absyn.Stmt Stmt() :
 }
 
 //AssignStmt(AssignableExpr lhs, Expr rhs)
-Absyn.Stmt AssignStmt() :
+Semant.Absyn.Stmt AssignStmt() :
 {
-	Absyn.Expr lhs = null, rhs = null;
+	Semant.Absyn.Expr lhs = null, rhs = null;
 }
 {
 	"AssignStmt" "("
 	lhs = Expr()
 	rhs = Expr()
 	")"
-	{ return new Absyn.AssignStmt((Absyn.AssignableExpr) lhs, rhs); }
+	{ return new Semant.Absyn.AssignStmt((Semant.Absyn.AssignableExpr) lhs, rhs); }
 }
 
 //BlockStmt(LinkedList<Stmt> stmts)
-Absyn.Stmt BlockStmt() :
+Semant.Absyn.Stmt BlockStmt() :
 {
-	Absyn.Stmt stmt = null;
-	LinkedList<Absyn.Stmt> stmts      = new LinkedList<Absyn.Stmt>();
+	Semant.Absyn.Stmt stmt = null;
+	LinkedList<Semant.Absyn.Stmt> stmts      = new LinkedList<Semant.Absyn.Stmt>();
 }
 {
 	"BlockStmt" "("
@@ -395,14 +395,14 @@ Absyn.Stmt BlockStmt() :
 			( stmt = Stmt() { stmts.add(stmt); } )*
 			")"
 	")"
-	{ return new Absyn.BlockStmt(stmts); }
+	{ return new Semant.Absyn.BlockStmt(stmts); }
 }
 
 //IfStmt(Expr test, Stmt thenStm, Stmt elseStm)
-Absyn.Stmt IfStmt() :
+Semant.Absyn.Stmt IfStmt() :
 {
-	Absyn.Expr test;
-	Absyn.Stmt thenStm, elseStm = null;
+	Semant.Absyn.Expr test;
+	Semant.Absyn.Stmt thenStm, elseStm = null;
 }
 {
 	"IfStmt" "("
@@ -411,15 +411,15 @@ Absyn.Stmt IfStmt() :
 	( "null" {elseStm = null;}
 	| elseStm = Stmt() )
 	")"
-	{ return new Absyn.IfStmt(test, thenStm, elseStm); }
+	{ return new Semant.Absyn.IfStmt(test, thenStm, elseStm); }
 }
 
 //XinuCallStmt(list of Expr)
-Absyn.Stmt XinuCallStmt() :
+Semant.Absyn.Stmt XinuCallStmt() :
 {
 	Token name;
-	Absyn.Expr arg;
-	LinkedList<Absyn.Expr> args      = new LinkedList<Absyn.Expr>();
+	Semant.Absyn.Expr arg;
+	LinkedList<Semant.Absyn.Expr> args      = new LinkedList<Semant.Absyn.Expr>();
 }
 {
 	"XinuCallStmt" "(" name = <ID>
@@ -427,14 +427,14 @@ Absyn.Stmt XinuCallStmt() :
 		       ( arg = Expr() {args.add(arg); } )*
 		       ")"
 	")"
-		{ return new Absyn.XinuCallStmt(name.image, args); }
+		{ return new Semant.Absyn.XinuCallStmt(name.image, args); }
 }
 
 //WhileStmt(Expr test, Stmt body)
-Absyn.Stmt WhileStmt() :
+Semant.Absyn.Stmt WhileStmt() :
 {
-	Absyn.Expr test;
-	Absyn.Stmt body;
+	Semant.Absyn.Expr test;
+	Semant.Absyn.Stmt body;
 }
 {
 	"WhileStmt" "("
@@ -442,13 +442,13 @@ Absyn.Stmt WhileStmt() :
 	body = Stmt()
 	")"
 
-	{ return new Absyn.WhileStmt(test, body); }
+	{ return new Semant.Absyn.WhileStmt(test, body); }
 }
 
 
-Absyn.Expr Expr() :
+Semant.Absyn.Expr Expr() :
 {
-	Absyn.Expr e;
+	Semant.Absyn.Expr e;
 }
 {
 	(
@@ -483,144 +483,144 @@ Absyn.Expr Expr() :
 
 
 //AddExpr(Expr e1, Expr e2)
-Absyn.AddExpr AddExpr() :
+Semant.Absyn.AddExpr AddExpr() :
 {
-	Absyn.Expr e1, e2;
+	Semant.Absyn.Expr e1, e2;
 }
 {
 	"AddExpr" "("
 	e1 = Expr() e2 = Expr()
 	")"
-	{ return new Absyn.AddExpr(e1, e2); }
+	{ return new Semant.Absyn.AddExpr(e1, e2); }
 }
 
 //AndExpr(Expr e1, Expr e2)
-Absyn.AndExpr AndExpr() :
+Semant.Absyn.AndExpr AndExpr() :
 {
-	Absyn.Expr e1, e2;
+	Semant.Absyn.Expr e1, e2;
 }
 {
 	"AndExpr" "("
 	e1 = Expr() e2 = Expr()
 	")"
-	{ return new Absyn.AndExpr(e1, e2); }
+	{ return new Semant.Absyn.AndExpr(e1, e2); }
 }
 
 //DivExpr(Expr e1, Expr e2)
-Absyn.DivExpr DivExpr() :
+Semant.Absyn.DivExpr DivExpr() :
 {
-	Absyn.Expr e1, e2;
+	Semant.Absyn.Expr e1, e2;
 }
 {
 	"DivExpr" "("
 	e1 = Expr() e2 = Expr()
 	")"
-	{ return new Absyn.DivExpr(e1, e2); }
+	{ return new Semant.Absyn.DivExpr(e1, e2); }
 }
 
 //EqualExpr(Expr e1, Expr e2)
-Absyn.EqualExpr EqualExpr() :
+Semant.Absyn.EqualExpr EqualExpr() :
 {
-	Absyn.Expr e1, e2;
+	Semant.Absyn.Expr e1, e2;
 }
 {
 	"EqualExpr" "("
 	e1 = Expr() e2 = Expr()
 	")"
-	{ return new Absyn.EqualExpr(e1, e2); }
+	{ return new Semant.Absyn.EqualExpr(e1, e2); }
 }
 
 //GreaterExpr(Expr e1, Expr e2)
-Absyn.GreaterExpr GreaterExpr() :
+Semant.Absyn.GreaterExpr GreaterExpr() :
 {
-	Absyn.Expr e1, e2;
+	Semant.Absyn.Expr e1, e2;
 }
 {
 	"GreaterExpr" "("
 	e1 = Expr() e2 = Expr()
 	")"
-	{ return new Absyn.GreaterExpr(e1, e2); }
+	{ return new Semant.Absyn.GreaterExpr(e1, e2); }
 }
 
 //LesserExpr(Expr e1, Expr e2)
-Absyn.LesserExpr LesserExpr() :
+Semant.Absyn.LesserExpr LesserExpr() :
 {
-	Absyn.Expr e1, e2;
+	Semant.Absyn.Expr e1, e2;
 }
 {
 	"LesserExpr" "("
 	e1 = Expr() e2 = Expr()
 	")"
-	{ return new Absyn.LesserExpr(e1, e2); }
+	{ return new Semant.Absyn.LesserExpr(e1, e2); }
 }
 
 //MulExpr(Expr e1, Expr e2)
-Absyn.MulExpr MulExpr() :
+Semant.Absyn.MulExpr MulExpr() :
 {
-	Absyn.Expr e1, e2;
+	Semant.Absyn.Expr e1, e2;
 }
 {
 	"MulExpr" "("
 	e1 = Expr() e2 = Expr()
 	")"
-	{ return new Absyn.MulExpr(e1, e2); }
+	{ return new Semant.Absyn.MulExpr(e1, e2); }
 }
 
 //NotEqExpr(Expr e1, Expr e2)
-Absyn.NotEqExpr NotEqExpr() :
+Semant.Absyn.NotEqExpr NotEqExpr() :
 {
-	Absyn.Expr e1, e2;
+	Semant.Absyn.Expr e1, e2;
 }
 {
 	"NotEqExpr" "("
 	e1 = Expr() e2 = Expr()
 	")"
-	{ return new Absyn.NotEqExpr(e1, e2); }
+	{ return new Semant.Absyn.NotEqExpr(e1, e2); }
 }
 
 //OrExpr(Expr e1, Expr e2)
-Absyn.OrExpr OrExpr() :
+Semant.Absyn.OrExpr OrExpr() :
 {
-	Absyn.Expr e1, e2;
+	Semant.Absyn.Expr e1, e2;
 }
 {
 	"OrExpr" "("
 	e1 = Expr() e2 = Expr()
 	")"
-	{ return new Absyn.OrExpr(e1, e2); }
+	{ return new Semant.Absyn.OrExpr(e1, e2); }
 }
 
 //SubExpr(Expr e1, Expr e2)
-Absyn.SubExpr SubExpr() :
+Semant.Absyn.SubExpr SubExpr() :
 {
-	Absyn.Expr e1, e2;
+	Semant.Absyn.Expr e1, e2;
 }
 {
 	"SubExpr" "("
 	e1 = Expr() e2 = Expr()
 	")"
-	{ return new Absyn.SubExpr(e1, e2); }
+	{ return new Semant.Absyn.SubExpr(e1, e2); }
 }
 
 //ArrayExpr(Expr target, Expr index)
-Absyn.ArrayExpr ArrayExpr() :
+Semant.Absyn.ArrayExpr ArrayExpr() :
 {
-	Absyn.Expr target, index;
+	Semant.Absyn.Expr target, index;
 }
 {
 	"ArrayExpr" "("
 	target = Expr() index = Expr()
 	")"
-	{ return new Absyn.ArrayExpr(target, index); }
+	{ return new Semant.Absyn.ArrayExpr(target, index); }
 }
 
 //CallExpr(Expr target, String method, LinkedList<Expr> args)
-Absyn.CallExpr CallExpr() :
+Semant.Absyn.CallExpr CallExpr() :
 {
-	Absyn.Expr target;
+	Semant.Absyn.Expr target;
 	Token method;
-	Absyn.Expr arg;
-	LinkedList<Absyn.Expr> args = new LinkedList<Absyn.Expr>();
+	Semant.Absyn.Expr arg;
+	LinkedList<Semant.Absyn.Expr> args = new LinkedList<Semant.Absyn.Expr>();
 }
 {
 	"CallExpr" "("
@@ -629,33 +629,33 @@ Absyn.CallExpr CallExpr() :
 		       ( arg = Expr() {args.add(arg); } )*
 		       ")"
 	")"
-	{ return new Absyn.CallExpr(target, method.image, args); }
+	{ return new Semant.Absyn.CallExpr(target, method.image, args); }
 }
 
 //FalseExpr()
-Absyn.FalseExpr FalseExpr() :
+Semant.Absyn.FalseExpr FalseExpr() :
 {
 }
 {
 	"FalseExpr"
-	{ return new Absyn.FalseExpr(); }
+	{ return new Semant.Absyn.FalseExpr(); }
 }
 
 //FieldExpr(Expr target, String field)
-Absyn.FieldExpr FieldExpr() :
+Semant.Absyn.FieldExpr FieldExpr() :
 {
-	Absyn.Expr target;
+	Semant.Absyn.Expr target;
 	Token field;
 }
 {
 	"FieldExpr" "("
 	target = Expr() field = <ID>
 	")"
-	{ return new Absyn.FieldExpr(target, field.image); }
+	{ return new Semant.Absyn.FieldExpr(target, field.image); }
 }
 
 //IdentifierExpr(String id)
-Absyn.IdentifierExpr IdentifierExpr() :
+Semant.Absyn.IdentifierExpr IdentifierExpr() :
 {
 	Token id;
 }
@@ -663,29 +663,29 @@ Absyn.IdentifierExpr IdentifierExpr() :
 	"IdentifierExpr" "("
 	id = <ID>
 	")"
-	{ return new Absyn.IdentifierExpr(id.image); }
+	{ return new Semant.Absyn.IdentifierExpr(id.image); }
 }
 
 
 //NegExpr(Expr e1)
-Absyn.NegExpr NegExpr() :
+Semant.Absyn.NegExpr NegExpr() :
 {
-	Absyn.Expr e1;
+	Semant.Absyn.Expr e1;
 }
 {
 	"NegExpr" "("
 	e1 = Expr()
 	")"
-	{return new Absyn.NegExpr(e1); }
+	{return new Semant.Absyn.NegExpr(e1); }
 }
 
 
 //NewArrayExpr(Type type, LinkedList<Expr> dimensions)
-Absyn.NewArrayExpr NewArrayExpr() :
+Semant.Absyn.NewArrayExpr NewArrayExpr() :
 {
-	Absyn.Type type;
-	Absyn.Expr expr;
-	LinkedList<Absyn.Expr> dimensions = new LinkedList<Absyn.Expr>();
+	Semant.Absyn.Type type;
+	Semant.Absyn.Expr expr;
+	LinkedList<Semant.Absyn.Expr> dimensions = new LinkedList<Semant.Absyn.Expr>();
 }
 {
 	"NewArrayExpr" "("
@@ -695,48 +695,48 @@ Absyn.NewArrayExpr NewArrayExpr() :
 		       | "null" { dimensions.add(null); } )*
 		       ")"
 	")"
-	{ return new Absyn.NewArrayExpr(type, dimensions); }
+	{ return new Semant.Absyn.NewArrayExpr(type, dimensions); }
 }
 
 //NewObjectExpr(Type type)
-Absyn.NewObjectExpr NewObjectExpr() :
+Semant.Absyn.NewObjectExpr NewObjectExpr() :
 {
-	Absyn.Type type;
+	Semant.Absyn.Type type;
 }
 {
 	"NewObjectExpr" "("
 	type = Type()
 	")"
-	{ return new Absyn.NewObjectExpr(type); }
+	{ return new Semant.Absyn.NewObjectExpr(type); }
 }
 
 //NotExpr(Expr e1)
-Absyn.NotExpr NotExpr() :
+Semant.Absyn.NotExpr NotExpr() :
 {
-	Absyn.Expr e1;
+	Semant.Absyn.Expr e1;
 }
 {
 	"NotExpr" "("
 	e1 = Expr()
 	")"
-	{ return new Absyn.NotExpr(e1); }
+	{ return new Semant.Absyn.NotExpr(e1); }
 }
 
 //NullExpr()
-Absyn.NullExpr NullExpr() :
+Semant.Absyn.NullExpr NullExpr() :
 {
 }
 {
 	"NullExpr"
-	{ return new Absyn.NullExpr(); }
+	{ return new Semant.Absyn.NullExpr(); }
 }
 
 //XinuCallExpr(list of Expr)
-Absyn.XinuCallExpr XinuCallExpr() :
+Semant.Absyn.XinuCallExpr XinuCallExpr() :
 {
 	Token name;
-	Absyn.Expr arg;
-	LinkedList<Absyn.Expr> args      = new LinkedList<Absyn.Expr>();
+	Semant.Absyn.Expr arg;
+	LinkedList<Semant.Absyn.Expr> args      = new LinkedList<Semant.Absyn.Expr>();
 }
 {
 	"XinuCallExpr" "(" name = <ID>
@@ -744,42 +744,42 @@ Absyn.XinuCallExpr XinuCallExpr() :
 		       ( arg = Expr() {args.add(arg); } )*
 		       ")"
 	")"
-		{ return new Absyn.XinuCallExpr(name.image, args); }
+		{ return new Semant.Absyn.XinuCallExpr(name.image, args); }
 }
 //ThisExpr()
-Absyn.ThisExpr ThisExpr() :
+Semant.Absyn.ThisExpr ThisExpr() :
 {}
 {
 	"ThisExpr"
-	{ return new Absyn.ThisExpr(); }
+	{ return new Semant.Absyn.ThisExpr(); }
 }
 
 //TrueExpr()
-Absyn.TrueExpr TrueExpr() :
+Semant.Absyn.TrueExpr TrueExpr() :
 {}
 {
 	"TrueExpr"
-	{ return new Absyn.TrueExpr(); }
+	{ return new Semant.Absyn.TrueExpr(); }
 }
 
 //IntegerLiteral(int value)
-Absyn.IntegerLiteral IntegerLiteral() :
+Semant.Absyn.IntegerLiteral IntegerLiteral() :
 { Token t; }
 {
 	"IntegerLiteral" "("
 	t=<INT>
 	")"
-	{ return new Absyn.IntegerLiteral(new Integer(t.toString())); }
+	{ return new Semant.Absyn.IntegerLiteral(new Integer(t.toString())); }
 }
 
 
 //StringLiteral(String value)
-Absyn.StringLiteral StringLiteral() :
+Semant.Absyn.StringLiteral StringLiteral() :
 { Token t; }
 {
 	"StringLiteral" "("
 	t=<STRING>
 	")"
-	{ return new Absyn.StringLiteral(t.toString()); }
+	{ return new Semant.Absyn.StringLiteral(t.toString()); }
 }
 

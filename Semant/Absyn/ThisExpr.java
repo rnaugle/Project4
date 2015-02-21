@@ -1,6 +1,6 @@
 package Semant.Absyn;
 
-public class ThisExpr {
+public class ThisExpr extends Expr{
 
 	
 	public ThisExpr(){

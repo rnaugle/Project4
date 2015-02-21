@@ -2,7 +2,7 @@ package Semant.Absyn;
 
 public class StringLiteral extends Expr{
 
-	String value;
+	public String value;
 	public StringLiteral(String value){
 		this.value= value;
 	}

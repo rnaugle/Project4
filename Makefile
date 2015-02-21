@@ -8,10 +8,10 @@ JJDOC    = jjdoc
 JAVACC_FLAGS = -NOSTATIC
 JAVAC_FLAGS = -Xdepend
 
-JAVACCGEN = SimpleCharStream.java ParseException.java \
-        $(PARSER).java $(PARSER)Constants.java \
-        $(PARSER)TokenManager.java Token.java \
-        TokenMgrError.java
+JAVACCGEN = Semant/SimpleCharStream.java Semant/ParseException.java \
+        Semant/$(PARSER).java Semant/$(PARSER)Constants.java \
+        Semant/$(PARSER)TokenManager.java Semant/Token.java \
+        Semant/TokenMgrError.java
 
 ABSYN    = Semant/Absyn/Absyn.java Semant/Absyn/Expr.java \
 	Semant/Absyn/AddExpr.java Semant/Absyn/ArrayExpr.java \
@@ -39,8 +39,7 @@ ABSYN    = Semant/Absyn/Absyn.java Semant/Absyn/Expr.java \
 	Semant/Absyn/XinuCallExpr.java Semant/Absyn/XinuCallStmt.java
 
 VISIT    = Semant/Visit/Visitable.java Semant/Visit/Visitor.java \
-	Semant/Visit/AbsynPrintVisitor.java \
-	Semant/Visit/Interpreter.java
+	Semant/Visit/AbsynPrintVisitor.java 
 	
 TYPES	 = Semant/Types/ARRAY.java Semant/Types/BOOLEAN.java \
 	Semant/Types/CLASS.java Semant/Types/FIELD.java \
@@ -49,7 +48,7 @@ TYPES	 = Semant/Types/ARRAY.java Semant/Types/BOOLEAN.java \
 	Semant/Types/RECORD.java Semant/Types/STRING.java \
 	Semant/Types/Type.java Semant/Types/VOID.java
 
-SRCS     = $(VISIT) $(ABSYN) $(PARSER).java Semant/Main.java
+SRCS     = $(TYPES) $(VISIT) $(ABSYN) $(PARSER).java Semant/Main.java
 
 all:  $(SRCS:.java=.class)
 
@@ -61,8 +60,8 @@ all:  $(SRCS:.java=.class)
 $(PARSER).java: Semant/$(PARSER).jj
 	$(JAVACC) $(JAVACC_FLAGS) $<
 
-parser: $(PARSER).class $(PARSER)Constants.class \
-	$(PARSER)TokenManager.class ParseException.class
+parser: Semant/$(PARSER).class Semant/$(PARSER)Constants.class \
+	Semant/$(PARSER)TokenManager.class Semant/ParseException.class
 
 main: $(PARSER).class Main.class
 
