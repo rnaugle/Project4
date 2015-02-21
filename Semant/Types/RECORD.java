@@ -6,6 +6,10 @@ import java.util.Iterator;
 
 public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 	java.util.LinkedList<FIELD> fields;
+	
+	public RECORD(){
+		fields = new java.util.LinkedList<FIELD>();
+	}
 
 	public RECORD(java.util.LinkedList<FIELD> f){
 		this.fields = f;
