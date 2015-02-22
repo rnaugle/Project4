@@ -2,6 +2,9 @@ package Semant;
 import Semant.Types.*;
 import Semant.Symbol.*;
 public class Main {
+	
+	public static Table tb;
+	
 	public static void main(String[] args)
  {
     Semant.Absyn.Program pm = null;
@@ -22,7 +25,7 @@ public class Main {
         System.exit(-1);
       }
     
-    Table tb = new Table();
+    tb = new Table();
     
     
     java.util.LinkedList<FIELD> f = new java.util.LinkedList<FIELD>();
@@ -48,48 +51,90 @@ public class Main {
     xinu.fields = null;
     xinu.instance = null;
     
+    CLASS thread = new CLASS(Symbol.symbol("Thread"));
+    xinu.methods = null;
+    xinu.parent = null;
+    xinu.fields = null;
+    xinu.instance = null;
+    tb.put(xinu.name, xinu);
+    tb.put(thread.name, thread);
     
-    
-    
+    java.util.LinkedList<String> classNames = new java.util.LinkedList<String>();
+    //CLASSES, DUPLICATES
     for(Semant.Absyn.ClassDecl cd : pm.classes){
+<<<<<<< HEAD
     	CLASS c1 = convertClassDecl(cd);
+=======
+    	for(String s : classNames){
+    		if(s.equals(cd.name)){
+    			//Error print
+    			System.out.println("ERROR duplicate class");
+    			return;
+    		}
+    	}
+    	s.add(cd.name);
+    	CLASS c1 = new CLASS(Symbol.symbol(cd.name));
+    	
+>>>>>>> master
     	RECORD methods = new RECORD();
-    	for(Semant.Absyn.MethodDecl md : cd.methods){
-    		methods.put(new FUNCTION(Symbol.symbol(md.name),null, new RECORD(), null), Symbol.symbol(md.name));
-    	}
-    	c1.methods = methods;
+    	//for(Semant.Absyn.MethodDecl md : cd.methods){
+    	//	methods.put(new FUNCTION(Symbol.symbol(md.name),null, new RECORD(), null), Symbol.symbol(md.name));
+    	//}
+  
     	RECORD fields = new RECORD();
-    	for(Semant.Absyn.VarDecl vd : cd.fields){
-    		fields.put(null, Symbol.symbol(vd.name));
-    	}
+    	//for(Semant.Absyn.VarDecl vd : cd.fields){
+    	//	fields.put(null, Symbol.symbol(vd.name));
+    	//}
+    	c1.methods = methods;
+    	
     	c1.fields = fields;
+    	
+   
+    	//c1.methods = null;
+    	
+    	//c1.fields = null;
     	c1.parent = null;
     	c1.instance = null;
     	tb.put(c1.name, c1);
     }
+    //BUILD PARENTS
+    for(Semant.Absyn.ClassDecl cd : pm.classes){
+    	CLASS c1 = (CLASS)tb.get(Symbol.symbol(cd.name));
+    	CLASS p1 = (CLASS)tb.get(Symbol.symbol(cd.parent));
+    	
+    	if(p1 == null){
+    		//print error cannot resolve parent class
+    		System.out.println("ERROR cannot resolve parent class sigma");
+    		return;
+    	}else{
+    		c1.parent = p1;
+    	    		
+    	}    	
+    	//OBJECT instance = new OBJECT(c1, );
+    	
+    }
+    
+    //CHECK FOR CYCLE
+    for(Semant.Absyn.ClassDecl cd : pm.classes){
+    	CLASS c1 = (CLASS)tb.get(Symbol.symbol(cd.name));
+    	String ogClassName = cd.name;
+    	CLASS p1 = (CLASS)tb.get(Symbol.symbol(cd.parent));
+    	while(p1.parent != null){
+    		p1 = p1.parent;
+    		if(p1.name == ogClassName){
+    			//print error cycle
+    			System.out.println("ERROR cyclic inheritence");
+    			return;
+    		}
+    	}    	
+    }
     
     for(Semant.Absyn.ClassDecl cd : pm.classes){
     	CLASS c1 = (CLASS)tb.get(Symbol.symbol(cd.name));
-    	Object p1 = tb.get(Symbol.symbol(cd.parent));
-    	if(!(p1 instanceof CLASS)){
-    		//print error
-    		return;
-    	}
-    	CLASS parent = (CLASS) p1;
-    	if(parent == null){
-    		//print error
-    		return;
-    	}else{
-    		c1.parent = parent;
-    		for(FIELD parentmethods : parent.methods){
-    			c1.methods.put(parentmethods.type, parentmethods.name);
-    		}
-    		for(FIELD parentfields : parent.fields){
-    			c1.fields.put(parentfields.type, parentfields.name);
-    		}
-    	}
-    	
     }
+    
+    
+    
 	
 Semant.Type.CLASS convertClassDecl(Semant.Absyn.ClassDecl cd)
 {
@@ -166,4 +211,6 @@ Semant.Types.FIELD createMethodsFIELD(Semant.Absyn.MethodDecl md, int index)
     //        Visit.Interpreter interp = new Visit.Interpreter();
            // System.out.println(interp.visit(g));
     }
+	
+	//public static parent merge
 }  //Main
