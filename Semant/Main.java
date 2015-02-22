@@ -161,6 +161,7 @@ public class Main {
 	
 Semant.Type.CLASS convertClassDecl(Semant.Absyn.ClassDecl cd)
 {
+	tb.beginScope();
 	Semant.Types.CLASS c = new Semant.Type.CLASS(new Semant.Symbol.Symbol(cd.name));
 	c.fields = new Semant.Types.RECORD();
 	c.fields = createFieldRECORD(cd.fields);
@@ -171,6 +172,7 @@ Semant.Type.CLASS convertClassDecl(Semant.Absyn.ClassDecl cd)
 	else
 		c.parent = null;
 	c.instance = createOBJECT(c);
+	tb.endScope();
 	return c;
 }
 
@@ -183,8 +185,11 @@ Semant.Types.OBJECT createOBJECT(Semant.Types.CLASS c)
 Semant.Types.RECORD createFieldRECORD(java.util.LinkedList<VarDecl> fields)
 {
 	Semant.Types.RECORD f = new Semant.Types.RECORD();
-	for (int i = 0; i < fields.size(); i++)
+	for (int i = 0; i < fields.size(); i++){
 		f.fields.add(createFieldsFIELD(fields.get(i),i);
+		if (typecheck(fields.get(i)) == true)
+			tb.put(new Semant.Symbol.Symbol(fields.get(i).name),fields.get(i));
+	}
 	return f;
 }
 
@@ -217,6 +222,8 @@ Semant.Types.FIELD createMethodsFIELD(Semant.Absyn.MethodDecl md, int index)
 	else
 		return null;
 }
+
+
 
     // Print Visitor
     //     System.out.println("Input String:");
