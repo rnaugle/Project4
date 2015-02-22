@@ -14,10 +14,13 @@ public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 	}
 	
 	public FIELD get(Symbol name){
-		if (tb.get(name) instanceof FIELD)
-			return tb.get(name);
-		else	
-			return null;
+		for (int i = 0; i < fields.size(); i++)
+		{
+			FIELD f = fields.get(i);
+			if (f.name == name)
+				return f;
+		}
+		return null;
 	}
 	
 	public Iterator<FIELD> iterator(){
@@ -27,8 +30,9 @@ public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 	}
 	
 	public FIELD put(Type type, Symbol name){
-		tb.put(name,type);
+		//tb.put(name,type);
 		FIELD field = new FIELD(type,counter++,name);
+		this.fields.add(field);
 		return field;
 	}
 
