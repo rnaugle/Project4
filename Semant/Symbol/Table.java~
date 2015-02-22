@@ -20,7 +20,7 @@ public class Table{
 
 	private int hash(Symbol s) {
 		int h = 0;
-		for (int i = 0; i <s.toString().length();i++)
+		for (int i = 0; i <=s.toString().length();i++)
 			{h = h*65599+s.toString().charAt(i); }
 		return h;
 	}
