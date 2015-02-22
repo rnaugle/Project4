@@ -44,7 +44,10 @@ public class Main {
     f.add(yield);
     f.add(sleep);
     RECORD xinuMethods = new RECORD();
-	xinuMethods.fields = f;
+	//xinuMethods.fields = f;
+    for(FIELD field : f){
+    	xinuMethods.put(field, field.name);
+    }
     CLASS xinu = new CLASS(Symbol.symbol("Xinu"));
     xinu.methods = xinuMethods;
     xinu.parent = null;
@@ -72,28 +75,28 @@ public class Main {
     		}
     	}
     	classNames.add(cd.name);
-    	CLASS c1 = new CLASS(Symbol.symbol(cd.name));
+    	//CLASS c1 = new CLASS(Symbol.symbol(cd.name));
     	
-    	RECORD methods = new RECORD();
+    	//RECORD methods = new RECORD();
     	//for(Semant.Absyn.MethodDecl md : cd.methods){
     	//	methods.put(new FUNCTION(Symbol.symbol(md.name),null, new RECORD(), null), Symbol.symbol(md.name));
     	//}
   
-    	RECORD fields = new RECORD();
+    	//RECORD fields = new RECORD();
     	//for(Semant.Absyn.VarDecl vd : cd.fields){
     	//	fields.put(null, Symbol.symbol(vd.name));
     	//}
-    	c1.methods = methods;
+    	//c1.methods = methods;
     	
-    	c1.fields = fields;
+    	//c1.fields = fields;
     	
    
     	//c1.methods = null;
     	
     	//c1.fields = null;
-    	c1.parent = null;
-    	c1.instance = null;
-    	tb.put(c1.name, c1);
+    	//c1.parent = null;
+    	//c1.instance = null;
+    	//tb.put(c1.name, c1);
     }
     
     if(error == true){
@@ -159,64 +162,7 @@ public class Main {
     
     
 	
-Semant.Type.CLASS convertClassDecl(Semant.Absyn.ClassDecl cd)
-{
-	Semant.Types.CLASS c = new Semant.Type.CLASS(new Semant.Symbol.Symbol(cd.name));
-	c.fields = new Semant.Types.RECORD();
-	c.fields = createFieldRECORD(cd.fields);
-	c.methods = new Semant.Types.RECORD();
-	c.methods = createMethodRECORD(cd.methods);
-	if (cd.parent != null)
-		c.parent = new Semant.Types.CLASS(new Semant.Symbol.Symbol(cd.parent));
-	else
-		c.parent = null;
-	c.instance = createOBJECT(c);
-	return c;
-}
 
-Semant.Types.OBJECT createOBJECT(Semant.Types.CLASS c)
-{
-	Semant.Types.OBJECT o = new Semant.Types.OBJECT(c);
-	return o;
-}
-
-Semant.Types.RECORD createFieldRECORD(java.util.LinkedList<VarDecl> fields)
-{
-	Semant.Types.RECORD f = new Semant.Types.RECORD();
-	for (int i = 0; i < fields.size(); i++)
-		f.fields.add(createFieldsFIELD(fields.get(i),i);
-	return f;
-}
-
-Semant.Types.RECORD createMethodRECORD(java.util.LinkedList<MethodDecl> methods)
-{
-	Semant.Types.RECORD m = new Semant.Types.RECORD();
-	for (int i = 0; i < methods.size(); i++)
-		f.fields.add(createMethodsFIELD(fields.get(i),i);
-	return f;
-}
-
-Semant.Types.FIELD createFieldsFIELD(Semant.Absyn.VarDecl vd, int index)
-{
-	if (vd.type instanceof Semant.Abysn.ArrayType)
-		return new FIELD(Semant.Types.ARRAY,index,new Semant.Symbol.Symbol(vd.name));
-	else if (vd.type instanceof Semant.Absyn.BooleanType)
-		return new FIELD(Semant.Types.BOOLEAN,index,new Semant.Symbol.Symbol(vd.name));
-	else if (vd.type instanceof Semant.Absyn.IdentifierType)
-		return new FIELD(Semant.Types.OBJECT,index,new Semant.Symbol.Symbol(vd.name));
-	else if (vd.type instanceof Semant.Absyn.IntegerType)
-		return new FIELD(Semant.Types.INT,index,new Semant.Symbol.Symbol(vd.name));
-	else
-		return null;
-}
-
-Semant.Types.FIELD createMethodsFIELD(Semant.Absyn.MethodDecl md, int index)
-{
-	if (md.type != null)
-		return new FIELD(Semant.Types.FUNCTION,index,new Semant.Symbol.Symbol(md.name));
-	else
-		return null;
-}
 
     // Print Visitor
     //     System.out.println("Input String:");
@@ -236,4 +182,140 @@ Semant.Types.FIELD createMethodsFIELD(Semant.Absyn.MethodDecl md, int index)
     }
 	
 	//public static parent merge
-}  //Main
+ //Main
+
+
+static CLASS convertClassDecl(Semant.Absyn.ClassDecl cd)
+{
+	CLASS c = new CLASS(Symbol.symbol(cd.name));
+	c.fields = new RECORD();
+	c.fields = createFieldRECORD(cd.fields);
+	c.methods = new RECORD();
+	c.methods = createMethodRECORD(cd.methods, c);
+	if (cd.parent != null)
+		c.parent = new CLASS(Symbol.symbol(cd.parent));
+	else
+		c.parent = null;
+	c.instance = createOBJECT(c);
+	return c;
+}
+
+static OBJECT createOBJECT(CLASS c)
+{
+	OBJECT o = new OBJECT(c);
+	return o;
+}
+
+static RECORD createFieldRECORD(java.util.LinkedList<Semant.Absyn.VarDecl> fields)
+{
+	RECORD f = new RECORD();
+	for (int i = 0; i < fields.size(); i++)
+		f.fields.add(createFieldsFIELD(fields.get(i),i));
+	return f;
+}
+
+static RECORD createMethodRECORD(java.util.LinkedList<Semant.Absyn.MethodDecl> methods, CLASS c)
+{
+	RECORD m = new RECORD();
+	for (int i = 0; i < methods.size(); i++)
+		m.fields.add(createMethodsFIELD(methods.get(i),i, c));
+	return m;
+}
+
+static FIELD createFieldsFIELD(Semant.Absyn.VarDecl vd, int index)
+{
+	if (vd.type instanceof Semant.Absyn.ArrayType)
+		return new FIELD(createARRAY(vd ,index),index,Symbol.symbol(vd.name));
+	else if (vd.type instanceof Semant.Absyn.BooleanType)
+		return new FIELD(new BOOLEAN(),index,Symbol.symbol(vd.name));
+	else if (vd.type instanceof Semant.Absyn.IdentifierType)
+		return new FIELD(new OBJECT(new CLASS(Symbol.symbol(vd.name))),index,Symbol.symbol(vd.name));
+	else if (vd.type instanceof Semant.Absyn.IntegerType)
+		return new FIELD(new INT(),index,Symbol.symbol(vd.name));
+	else
+		return null;
+}
+
+static ARRAY createARRAY(Semant.Absyn.VarDecl vd, int index)
+{
+	if (vd.type instanceof Semant.Absyn.BooleanType)
+		return new ARRAY(new BOOLEAN());
+	else if (vd.type instanceof Semant.Absyn.IdentifierType)
+		return new ARRAY(new OBJECT(new CLASS(Symbol.symbol(vd.name))));
+	else if (vd.type instanceof Semant.Absyn.IntegerType)
+		return new ARRAY(new INT());
+	else
+		return null;
+}
+
+static FIELD createMethodsFIELD(Semant.Absyn.MethodDecl md, int index, CLASS c)
+{
+	if (md.returnType != null)
+		return new FIELD(new FUNCTION(Symbol.symbol(md.name), c, createFormalRECORD(md.params), createType(md.returnType)),index,Symbol.symbol(md.name));
+	else
+		return null;
+}
+
+
+static RECORD createFormalRECORD(java.util.LinkedList<Semant.Absyn.Formal> formals)
+{
+	RECORD f = new RECORD();
+	for (int i = 0; i < formals.size(); i++)
+		f.fields.add(createFormalsFIELD(formals.get(i),i));
+	return f;
+}
+
+static FIELD createFormalsFIELD(Semant.Absyn.Formal formal, int index)
+{
+	if (formal.type instanceof Semant.Absyn.ArrayType)
+		return new FIELD(createARRAYFormal(formal ,index),index,Symbol.symbol(formal.name));
+	else if (formal.type instanceof Semant.Absyn.BooleanType)
+		return new FIELD(new BOOLEAN(),index,Symbol.symbol(formal.name));
+	else if (formal.type instanceof Semant.Absyn.IdentifierType)
+		return new FIELD(new OBJECT(new CLASS(Symbol.symbol(formal.name))),index,Symbol.symbol(formal.name));
+	else if (formal.type instanceof Semant.Absyn.IntegerType)
+		return new FIELD(new INT(),index,Symbol.symbol(formal.name));
+	else
+		return null;
+}
+
+static ARRAY createARRAYFormal(Semant.Absyn.Formal formal, int index)
+{
+	if (formal.type instanceof Semant.Absyn.BooleanType)
+		return new ARRAY(new BOOLEAN());
+	else if (formal.type instanceof Semant.Absyn.IdentifierType)
+		return new ARRAY(new OBJECT(new CLASS(Symbol.symbol(formal.name))));
+	else if (formal.type instanceof Semant.Absyn.IntegerType)
+		return new ARRAY(new INT());
+	else
+		return null;
+}
+
+
+static Type createType(Semant.Absyn.Type type)
+{
+	if (type instanceof Semant.Absyn.ArrayType)
+		return createTypeARRAY(type);
+	else if (type instanceof Semant.Absyn.BooleanType)
+		return new BOOLEAN();
+	else if (type instanceof Semant.Absyn.IdentifierType)
+		return new OBJECT(new CLASS(Symbol.symbol(((Semant.Absyn.IdentifierType)type).id)));
+	else if (type instanceof Semant.Absyn.IntegerType)
+		return new INT();
+	else
+		return null;
+}
+
+static Type createTypeARRAY(Semant.Absyn.Type type)
+{
+	if (type instanceof Semant.Absyn.BooleanType)
+		return new ARRAY(new BOOLEAN());
+	else if (type instanceof Semant.Absyn.IdentifierType)
+		return new ARRAY(new OBJECT(new CLASS(Symbol.symbol(((Semant.Absyn.IdentifierType)type).id))));
+	else if (type instanceof Semant.Absyn.IntegerType)
+		return new ARRAY(new INT());
+	else
+		return null;
+}
+
+}
