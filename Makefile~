@@ -6,12 +6,12 @@ JAVACC   = javacc
 JJDOC    = jjdoc
 
 JAVACC_FLAGS = -NOSTATIC
-JAVAC_FLAGS = -depend
+JAVAC_FLAGS = -Xdepend
 
-JAVACCGEN = SimpleCharStream.java ParseException.java \
-        $(PARSER).java $(PARSER)Constants.java \
-        $(PARSER)TokenManager.java Token.java \
-        TokenMgrError.java
+JAVACCGEN = Semant/SimpleCharStream.java Semant/ParseException.java \
+        Semant/$(PARSER).java Semant/$(PARSER)Constants.java \
+        Semant/$(PARSER)TokenManager.java Semant/Token.java \
+        Semant/TokenMgrError.java
 
 ABSYN    = Semant/Absyn/Absyn.java Semant/Absyn/Expr.java \
 	Semant/Absyn/AddExpr.java Semant/Absyn/ArrayExpr.java \
@@ -38,26 +38,32 @@ ABSYN    = Semant/Absyn/Absyn.java Semant/Absyn/Expr.java \
 	Semant/Absyn/VoidDecl.java Semant/Absyn/WhileStmt.java \
 	Semant/Absyn/XinuCallExpr.java Semant/Absyn/XinuCallStmt.java
 
-VISIT    = Semant/Visit/Visitor.java \
-	Semant/Visit/Visitable.java \
-	Semant/Visit/PrintVisitor.java \
+VISIT    = Semant/Visit/Visitable.java Semant/Visit/Visitor.java \
 	Semant/Visit/AbsynPrintVisitor.java 
-#	Semant/Visit/Interpreter.java
+	
+TYPES	 = Semant/Types/ARRAY.java Semant/Types/BOOLEAN.java \
+	Semant/Types/CLASS.java Semant/Types/FIELD.java \
+	Semant/Types/FUNCTION.java Semant/Types/INT.java \
+	Semant/Types/NIL.java Semant/Types/OBJECT.java \
+	Semant/Types/RECORD.java Semant/Types/STRING.java \
+	Semant/Types/Type.java Semant/Types/VOID.java
 
-SRCS     = $(VISIT) $(ABSYN) $(PARSER).java Semant/Main.java
+SYMBOL	= Semant/Symbol/Symbol.java Semant/Symbol/Table.java
+
+SRCS     = $(SYMBOL) $(TYPES) $(VISIT) $(ABSYN) $(PARSER).java Semant/Main.java
 
 all:  $(SRCS:.java=.class)
 
 %.class : %.java
-	$(JAVAC) $(JAVAC_FLAGS) $<
+	$(JAVAC) $<
 
 
 
 $(PARSER).java: Semant/$(PARSER).jj
-	$(JAVACC) $(JAVACC_FLAGS) $<
+	$(JAVACC) $(JAVACC_FLAGS) -d /Semant $<
 
-parser: $(PARSER).class $(PARSER)Constants.class \
-	$(PARSER)TokenManager.class ParseException.class
+parser: Semant/$(PARSER).class Semant/$(PARSER)Constants.class \
+	Semant/$(PARSER)TokenManager.class Semant/ParseException.class
 
 main: $(PARSER).class Main.class
 

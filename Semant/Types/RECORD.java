@@ -13,7 +13,7 @@ public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 		counter = 0;
 	}
 	
-	public FIELD get(Symbol name){
+	public FIELD get(Semant.Symbol.Symbol name){
 		for (int i = 0; i < fields.size(); i++)
 		{
 			FIELD f = fields.get(i);
@@ -29,7 +29,7 @@ public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 		
 	}
 	
-	public FIELD put(Type type, Symbol name){
+	public FIELD put(Type type, Semant.Symbol.Symbol name){
 		//tb.put(name,type);
 		FIELD field = new FIELD(type,counter++,name);
 		this.fields.add(field);
