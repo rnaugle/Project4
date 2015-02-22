@@ -43,7 +43,7 @@ public class Main {
     f.add(threadCreate);
     f.add(yield);
     f.add(sleep);
-    RECORD xinuMethods = new RECORD(f);
+    RECORD xinuMethods = new RECORD();
     CLASS xinu = new CLASS(Symbol.symbol("Xinu"));
     xinu.methods = xinuMethods;
     xinu.parent = null;
@@ -57,18 +57,19 @@ public class Main {
     xinu.instance = null;
     tb.put(xinu.name, xinu);
     tb.put(thread.name, thread);
-    
+    boolean error = false;
     java.util.LinkedList<String> classNames = new java.util.LinkedList<String>();
     //CLASSES, DUPLICATES
     for(Semant.Absyn.ClassDecl cd : pm.classes){
     	for(String s : classNames){
     		if(s.equals(cd.name)){
     			//Error print
-    			System.out.println("ERROR duplicate class");
-    			return;
+    			System.out.println("ERROR duplicate class: " + cd.name + ": line not available");
+    			error = true;
+    			//return;
     		}
     	}
-    	s.add(cd.name);
+    	classNames.add(cd.name);
     	CLASS c1 = new CLASS(Symbol.symbol(cd.name));
     	
     	RECORD methods = new RECORD();
@@ -92,36 +93,61 @@ public class Main {
     	c1.instance = null;
     	tb.put(c1.name, c1);
     }
+    
+    if(error == true){
+    	return;
+    }
     //BUILD PARENTS
     for(Semant.Absyn.ClassDecl cd : pm.classes){
     	CLASS c1 = (CLASS)tb.get(Symbol.symbol(cd.name));
-    	CLASS p1 = (CLASS)tb.get(Symbol.symbol(cd.parent));
-    	
-    	if(p1 == null){
-    		//print error cannot resolve parent class
-    		System.out.println("ERROR cannot resolve parent class sigma");
-    		return;
+    	if(cd.parent == null){
+    		
     	}else{
-    		c1.parent = p1;
-    	    		
-    	}    	
-    	//OBJECT instance = new OBJECT(c1, );
+    		CLASS p1 = (CLASS)tb.get(Symbol.symbol(cd.parent));
+        	
+        	if(p1 == null){
+        		//print error cannot resolve parent class
+        		System.out.println("ERROR cannot resolve parent class: "+cd.parent + ": line not available");
+        		error = true;
+        	}else{
+        		c1.parent = p1;
+        	    		
+        	}    	
+        	//OBJECT instance = new OBJECT(c1, );
+    	}
+    	
     	
     }
+    
+    if(error == true){
+    	return;
+    }
+    
+    
     
     //CHECK FOR CYCLE
     for(Semant.Absyn.ClassDecl cd : pm.classes){
     	CLASS c1 = (CLASS)tb.get(Symbol.symbol(cd.name));
     	String ogClassName = cd.name;
-    	CLASS p1 = (CLASS)tb.get(Symbol.symbol(cd.parent));
-    	while(p1.parent != null){
-    		p1 = p1.parent;
-    		if(p1.name == ogClassName){
-    			//print error cycle
-    			System.out.println("ERROR cyclic inheritence");
-    			return;
-    		}
-    	}    	
+    	if(cd.parent == null){
+    		   	
+    	}else{
+    		CLASS p1 = (CLASS)tb.get(Symbol.symbol(cd.parent));
+        	while(p1.parent != null){
+        		//System.out.println(p1.name.toString() + " ==?" + ogClassName);
+        		if(p1.name.toString().equals(ogClassName)){
+        			//print error cycle
+        			System.out.println("ERROR cyclic inheritence involving "+ cd.name + ": line not available");
+        			error = true;
+        			break;
+        		}
+        		p1 = (CLASS)tb.get(p1.parent.name);
+        	} 
+    	}
+    	
+    }
+    if(error == true){
+    	return;
     }
     
     for(Semant.Absyn.ClassDecl cd : pm.classes){
