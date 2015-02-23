@@ -65,7 +65,8 @@ public class Main {
     java.util.LinkedList<String> classNames = new java.util.LinkedList<String>();
     //CLASSES, DUPLICATES
     for(Semant.Absyn.ClassDecl cd : pm.classes){
-    	CLASS c1 = convertClassDecl(cd);
+    	//CLASS c1 = convertClassDecl(cd);
+    	CLASS c1 = new CLASS(Symbol.symbol(cd.name));
     	for(String s : classNames){
     		if(s.equals(cd.name)){
     			//Error print
@@ -77,21 +78,26 @@ public class Main {
     	classNames.add(cd.name);
     	//CLASS c1 = new CLASS(Symbol.symbol(cd.name));
     	
-    	//RECORD methods = new RECORD();
-    	//for(Semant.Absyn.MethodDecl md : cd.methods){
-    	//	methods.put(new FUNCTION(Symbol.symbol(md.name),null, new RECORD(), null), Symbol.symbol(md.name));
-    	//}
+    	RECORD methods = new RECORD();
+    	for(Semant.Absyn.MethodDecl md : cd.methods){
+    		RECORD formals = new RECORD;
+    		for(Semant.Absyn.Formal : md.params){
+    			//formals.put();
+    		}
+    		methods.put(new FUNCTION(Symbol.symbol(md.name),null, new RECORD(), null), Symbol.symbol(md.name));
+    		
+    	}
   
-    	//RECORD fields = new RECORD();
-    	//for(Semant.Absyn.VarDecl vd : cd.fields){
-    	//	fields.put(null, Symbol.symbol(vd.name));
-    	//}
-    	//c1.methods = methods;
+    	RECORD fields = new RECORD();
+    	for(Semant.Absyn.VarDecl vd : cd.fields){
+    		fields.put(null, Symbol.symbol(vd.name));
+    	}
+    	c1.methods = methods;
     	
-    	//c1.fields = fields;
+    	c1.fields = fields;
     	
    
-    	//c1.methods = null;
+    	c1.methods = null;
     	
     	//c1.fields = null;
     	//c1.parent = null;
