@@ -305,7 +305,7 @@ static boolean typecheckAddExpr(Semant.Absyn.AddExpr add)
 	else 
 		{
 		System.out.println("ERROR operator + cannot be applied to " + returnExprType(add.e1).toString() + ", " + returnExprType(add.e2).toString()
-			+ "\n" + Semant.Visit.AbsynPrintVisitor.visit(add) );
+			+ "found\n" + Semant.Visit.AbsynPrintVisitor.visit(add) );
 		return false;
 		}
 }
@@ -316,7 +316,7 @@ static boolean typecheckAndExpr(Semant.Abysn.AndExpr and)
 		return true;
 	else{
 		System.out.println("ERROR operator && cannot be applied to " + returnExprType(and.e1).toString() + ", " + returnExprType(and.e2).toString()
-			+ "\n" + Semant.Visit.AbsynPrintVisitor.visit(and.e2) );
+			+ "found\n" + Semant.Visit.AbsynPrintVisitor.visit(and.e2) );
 		return false;
 	}
 }
