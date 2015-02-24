@@ -26,7 +26,7 @@ public class INT extends Type{
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return null;
+		return new String("int");
 	}
 
 }

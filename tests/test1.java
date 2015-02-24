@@ -7,7 +7,7 @@ class test1{
 
 		k = 6;
 
-		s = true;
+		s = true + 1;
 
 		k = s;
 

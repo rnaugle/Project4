@@ -1,8 +1,10 @@
-//test vardecl return
+//test binoperator error
 
 class test {
 	public static void main (String[] args){
-		int d = 3;
+		int g;
+		if (true && 3)
+			g = 4;
 	}
 }
 

@@ -5,8 +5,9 @@ import java.util.Iterator;
 //import Semant.Visitor;
 
 public class RECORD extends Type implements java.lang.Iterable<FIELD>{
-	java.util.LinkedList<FIELD> fields;
-	int counter;
+	
+	public java.util.LinkedList<FIELD> fields;
+	public int counter;
 
 	public RECORD(){
 		this.fields = new java.util.LinkedList<FIELD>();
