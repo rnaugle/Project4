@@ -104,14 +104,23 @@ public ClassVisitor extends Visitor{
 		Semant.Types.Type t = e.target.accept(this);
 		Semant.Types.Type tm = ct.get(Symbol.symbol(e.method));
 		
-		//TODO count formals
+		//TODO compare formals tpes
 		
 		if (tm == null || !tm instanceof FUNCTION)
 			System.err.println("ERROR cannot resolve method " + e.method);
 		else
-			
+			if ((countFormals(tm.formals) == e.args.size()) && compareFormals(tm.formals,e.args))
+				return t;
+			else
+				
 			
 	  }
+
+	public int countFormals(Semant.Types.RECORD r)
+	{
+		return r.fields.size();
+	}
+	
 	  public Semant.Types.Type visit(ClassDecl e){
 	
 		  ot.beginScope();
@@ -121,14 +130,26 @@ public ClassVisitor extends Visitor{
 			  for(FIELD f : p.)
 		  }
 		  for(MethodDecl m: e.methods){
-			  m.accept(this;)
+			  m.accept(this);
 		  }
 		  
-		  
+		  ot.endScope();
 	  
 	  }
-	  public Semant.Types.Type visit(DivExpr e);
-	  public Semant.Types.Type visit(EqualExpr e);
+	  public Semant.Types.Type visit(DivExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if(t1 instanceof Semant.Types.INT && t2 instanceof Semant.Types.INT)
+			return t1;
+		else
+			System.err.println("ERROR operator / cannot be applied to " t1.toString +", " +t2.toString());
+	
+	}
+	  public Semant.Types.Type visit(EqualExpr e)
+	{
+		
+	} 
 	  public Semant.Types.Type visit(Expr e);
 	  public Semant.Types.Type visit(FalseExpr e);
 	  public Semant.Types.Type visit(FieldExpr e);

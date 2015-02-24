@@ -50,7 +50,7 @@ TYPES	 = Semant/Types/ARRAY.java Semant/Types/BOOLEAN.java \
 
 SYMBOL	= Semant/Symbol/Symbol.java Semant/Symbol/Table.java
 
-SRCS     = $(SYMBOL) $(TYPES) $(VISIT) $(ABSYN) $(PARSER).java Semant/Main.java
+SRCS     = $(PARSER) $(SYMBOL) $(TYPES) $(VISIT) $(ABSYN).java Semant/Main.java
 
 all:  $(SRCS:.java=.class)
 
