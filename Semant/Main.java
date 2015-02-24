@@ -77,31 +77,12 @@ public class Main {
     	}
     	classNames.add(cd.name);
     	//CLASS c1 = new CLASS(Symbol.symbol(cd.name));
-    	
-    	RECORD methods = new RECORD();
-    	for(Semant.Absyn.MethodDecl md : cd.methods){
-    		RECORD formals = new RECORD();
-    		for(Semant.Absyn.Formal formal : md.params){
-    			//formals.put();
-    		}
-    		methods.put(new FUNCTION(Symbol.symbol(md.name),null, new RECORD(), null), Symbol.symbol(md.name));
-    		
-    	}
-  
-    	RECORD fields = new RECORD();
-    	for(Semant.Absyn.VarDecl vd : cd.fields){
-    		fields.put(null, Symbol.symbol(vd.name));
-    	}
-    	c1.methods = methods;
-    	
-    	c1.fields = fields;
-    	
    
     	c1.methods = null;
     	
-    	//c1.fields = null;
-    	//c1.parent = null;
-    	//c1.instance = null;
+    	c1.fields = null;
+    	c1.parent = null;
+    	c1.instance = null;
     	//tb.put(c1.name, c1);
     }
     
@@ -125,6 +106,24 @@ public class Main {
         	    		
         	}    	
         	//OBJECT instance = new OBJECT(c1, );
+        	RECORD methods = new RECORD();
+        	for(Semant.Absyn.MethodDecl md : cd.methods){
+        		RECORD formals = new RECORD;
+        		for(Semant.Absyn.Formal form: md.params){
+        			if(form.type instanceof )
+        			formals.put(Symbol.symbol(formal), );
+        		}
+        		methods.put(new FUNCTION(Symbol.symbol(md.name),null, new RECORD(), null), Symbol.symbol(md.name));
+        		
+        	}
+      
+        	RECORD fields = new RECORD();
+        	for(Semant.Absyn.VarDecl vd : cd.fields){
+        		fields.put(null, Symbol.symbol(vd.name));
+        	}
+        	c1.methods = methods;
+        	
+        	c1.fields = fields;
     	}
     	
     	
@@ -139,6 +138,7 @@ public class Main {
     //CHECK FOR CYCLE
     for(Semant.Absyn.ClassDecl cd : pm.classes){
     	CLASS c1 = (CLASS)tb.get(Symbol.symbol(cd.name));
+    	String ogClassName = cd.name;
     	String ogClassName = cd.name;
     	if(cd.parent == null){
     		   	
