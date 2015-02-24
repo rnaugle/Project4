@@ -1,10 +1,11 @@
-//test binoperator error
+//test incorrect referencing error
 
 class test {
+	
 	public static void main (String[] args){
-		int g;
-		if (true && 3)
-			g = 4;
+		boolean g = 4;
+		int h = 1;
+		h = g;
 	}
 }
 

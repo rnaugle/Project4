@@ -7,14 +7,12 @@ Program(
      AbstractList(
       Formal(ArrayType(IdentifierType(String)) args))
      AbstractList(
-      VarDecl(IntegerType g null))
+      VarDecl(BooleanType g
+      TrueExpr)
+      VarDecl(IntegerType h
+      IntegerLiteral(1)))
      AbstractList(
-      IfStmt(
-       AndExpr(
-        TrueExpr
-        IntegerLiteral(3))
-       AssignStmt(
-        IdentifierExpr(g)
-        IntegerLiteral(4))
-       null))
+      AssignStmt(
+       IdentifierExpr(h)
+       IdentifierExpr(g)))
      IntegerLiteral(0))))))
