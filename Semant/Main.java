@@ -108,10 +108,10 @@ public class Main {
         	//OBJECT instance = new OBJECT(c1, );
         	RECORD methods = new RECORD();
         	for(Semant.Absyn.MethodDecl md : cd.methods){
-        		RECORD formals = new RECORD;
+        		RECORD formals = new RECORD();
         		for(Semant.Absyn.Formal form: md.params){
-        			if(form.type instanceof )
-        			formals.put(Symbol.symbol(formal), );
+        			if(form.type instanceof Semant.Absyn.Type)
+        				formals.put(form.type, Symbol.symbol(form));
         		}
         		methods.put(new FUNCTION(Symbol.symbol(md.name),null, new RECORD(), null), Symbol.symbol(md.name));
         		
@@ -240,7 +240,7 @@ static Type returnVarDeclTYPE(Semant.Absyn.VarDecl field)
 {
 	if (field.type instanceof Semant.Absyn.ArrayType)
 		return returnARRAYTYPE(field.type);
-	else if (field.type instance of Semant.Absyn.IdentifierType)
+	else if (field.type instanceof Semant.Absyn.IdentifierType)
 		return OBJECT;
 	else if (field.type instanceof Semant.Absyn.BooleanType)
 		return BOOLEAN;
@@ -258,7 +258,7 @@ static Type returnARRAYTYPE(Semant.Absyn.ArrayType array)
 		return INT;
 }
 
-static Type returnExprType(Semant.Absyn.Expr varexpr)
+/*static Type returnExprType(Semant.Absyn.Expr varexpr)
 {
 	if (varexpr instanceof Semant.Abysn.NullExpr)
 		return new NIL();
@@ -296,7 +296,7 @@ static Type returnExprType(Semant.Absyn.Expr varexpr)
 	else if (varexpr instanceof Semant.Abysn.LesserExpr)
 		return typecheckLesserExpr((Semant.Abysn.LesserExpr) varexpr);
 	else if 
-}
+}*/
 
 static boolean typecheckAddExpr(Semant.Absyn.AddExpr add)
 {

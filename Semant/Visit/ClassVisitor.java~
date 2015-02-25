@@ -13,10 +13,7 @@ public ClassVisitor extends Visitor{
 	}
 	
 	
-	public Semant.Types.Type visit(Absyn a)
-	{
-		return new Semant.Types.VOID();
-	}
+		public Semant.Types.Type visit(Absyn a);
 		
 	  public Semant.Types.Type visit(AddExpr e)
 	  {	
