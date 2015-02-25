@@ -1,22 +1,22 @@
 package Semant.Types;
 
-import Semant.Visitor;
+//import Semant.Visitor;
 
 public class CLASS extends Type{
 	
 	public RECORD fields;
 	public OBJECT instance;
 	public RECORD methods;
-	public String name;
+	public Semant.Symbol.Symbol name;
 	public CLASS parent;
 	
-	public CLASS(String s){
+	public CLASS(Semant.Symbol.Symbol s){
 		this.name = s;
 		
 	}
 
 	@Override
-	public void accept(Visitor v) {
+	public void accept(Semant.Visit.Visitor v) {
 		// TODO Auto-generated method stub
 		
 	}

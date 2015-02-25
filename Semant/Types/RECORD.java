@@ -39,7 +39,7 @@ public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 
 	@Override
 	public void accept(Semant.Visit.Visitor v) {
-		// TODO Auto-generated method stub
+		v.visit(this);
 		
 	}
 

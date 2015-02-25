@@ -1,6 +1,6 @@
 package Semant.Types;
 
-import Semant.Visitor;
+//import Semant.Visitor;
 
 public class INT extends Type{
 	
@@ -9,7 +9,7 @@ public class INT extends Type{
 	}
 
 	@Override
-	public void accept(Visitor v) {
+	public void accept(Semant.Visit.Visitor v) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -17,13 +17,16 @@ public class INT extends Type{
 	@Override
 	public boolean coerceTo(Type t) {
 		// TODO Auto-generated method stub
+		if( t.getClass().getName() == this.getClass().getName() ){
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return null;
+		return new String("int");
 	}
 
 }

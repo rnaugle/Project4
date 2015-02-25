@@ -1,11 +1,11 @@
 package Semant.Types;
 
-import Semant.Visitor;
+//import Semant.Visitor;
 
 public class VOID extends Type{
 
 	@Override
-	public void accept(Visitor v) {
+	public void accept(Semant.Visit.Visitor v) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -13,6 +13,9 @@ public class VOID extends Type{
 	@Override
 	public boolean coerceTo(Type t) {
 		// TODO Auto-generated method stub
+		if( t.getClass().getName() == this.getClass().getName() ){
+			return true;
+		}
 		return false;
 	}
 

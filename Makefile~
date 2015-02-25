@@ -50,7 +50,7 @@ TYPES	 = Semant/Types/ARRAY.java Semant/Types/BOOLEAN.java \
 
 SYMBOL	= Semant/Symbol/Symbol.java Semant/Symbol/Table.java
 
-SRCS     = $(SYMBOL) $(TYPES) $(VISIT) $(ABSYN) $(PARSER).java Semant/Main.java
+SRCS     = $(PARSER) $(SYMBOL) $(TYPES) $(VISIT) $(ABSYN).java Semant/Main.java
 
 all:  $(SRCS:.java=.class)
 
@@ -60,7 +60,7 @@ all:  $(SRCS:.java=.class)
 
 
 $(PARSER).java: Semant/$(PARSER).jj
-	$(JAVACC) $(JAVACC_FLAGS) -d /Semant $<
+	$(JAVACC) $(JAVACC_FLAGS) $<
 
 parser: Semant/$(PARSER).class Semant/$(PARSER)Constants.class \
 	Semant/$(PARSER)TokenManager.class Semant/ParseException.class

@@ -251,7 +251,7 @@ static Type returnVarDeclTYPE(Semant.Absyn.VarDecl field)
 static Type returnARRAYTYPE(Semant.Absyn.ArrayType array)
 {
 	if (array.type instanceof Semant.Absyn.IdentifierType)
-		return OBJECT;
+		return new OBJECT;
 	else if (array.type instanceof Semant.Absyn.BooleanType)
 		return BOOLEAN;
 	else

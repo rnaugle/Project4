@@ -17,8 +17,7 @@ public class CLASS extends Type{
 
 	@Override
 	public void accept(Semant.Visit.Visitor v) {
-		// TODO Auto-generated method stub
-		
+		v.visit(this);
 	}
 
 	@Override

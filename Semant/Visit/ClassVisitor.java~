@@ -206,13 +206,9 @@ public ClassVisitor extends Visitor{
 		Semant.Types.Type t2 = e.thenStmt.accept(this);
 		Semant.Types.Type t3 = e.elseStmt.accept(this);
 
-		if (!t1 instanceof Semant.Types.BOOLEAN)
-			System.err.println("ERROR incompatible types: boolean required, but " +t1.toString()+" found:");
-		else
-			return t1;
+		
 	}
-	  public Semant.Types.Type visit(IntegerLiteral e)
-		{ return new INT(); }
+	  public Semant.Types.Type visit(IntegerLiteral e);
 	  public Semant.Types.Type visit(IntegerType e){
 		  return new Semant.Types.INT();
 	  }

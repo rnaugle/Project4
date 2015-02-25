@@ -9,7 +9,7 @@ public abstract class Type implements Semant.Visit.Visitable{
 		
 	}
 	
-	public abstract void accept(Semant.Visit.Visitor v);
+	public abstract void accept(Semant.Visit.Visitor v){v.visit(this);}
 	public abstract boolean coerceTo(Type t);
 	public abstract String toString();
 	

@@ -1,6 +1,6 @@
 package Semant.Types;
 
-import Semant.Visitor;
+//import Semant.Types.Visitor;
 
 public class BOOLEAN extends Type {
 	public BOOLEAN(){
@@ -8,7 +8,7 @@ public class BOOLEAN extends Type {
 	}
 
 	@Override
-	public void accept(Visitor v) {
+	public void accept(Semant.Visit.Visitor v) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -17,6 +17,9 @@ public class BOOLEAN extends Type {
 	public
 	boolean coerceTo(Type t) {
 		// TODO Auto-generated method stub
+		if( t.getClass().getName() == this.getClass().getName() ){
+			return true;
+		}
 		return false;
 	}
 
