@@ -108,17 +108,29 @@ public ClassVisitor extends Visitor{
 		
 		if (tm == null || !tm instanceof FUNCTION)
 			System.err.println("ERROR cannot resolve method " + e.method);
+		else if ((countFormals((RECORD)tm.formals) != e.args.size()))
+			System.err.println("ERROR mismatch in number of arguments");
+		else if(!compareFormals((Semant.Types.RECORD)tm.formals,e.args))
+		System.err.println("ERROR incompatible types: " +t1.toString+" required, but "+t2.toString()+" found:";
 		else
-			if ((countFormals(tm.formals) == e.args.size()) && compareFormals(tm.formals,e.args))
-				return t;
-			else
-				
-			
+			return t;			
 	  }
 
 	public int countFormals(Semant.Types.RECORD r)
 	{
 		return r.fields.size();
+	}
+
+	public boolean compareFormals(Semant.Types.RECORD rs, LinkedList<Formals> fs)
+	{
+		for (int i = 0; i < rs.fields.size(); i++)
+		{
+			Semant.Types.Type t1 = rs.fields.get(i).type;
+			Semant.Types.Type t2 = fs.get(i).accept(this);
+			if (!t2.coerceTo(t1))
+				return false;
+		}
+		return true;
 	}
 	
 	  public Semant.Types.Type visit(ClassDecl e){
@@ -130,7 +142,8 @@ public ClassVisitor extends Visitor{
 			  for(FIELD f : p.)
 		  }
 		  for(MethodDecl m: e.methods){
-			  m.accept(this);
+			  Semant.Types.Type func = m.accept(this);
+			ot.put(func,func.name);
 		  }
 		  
 		  ot.endScope();
