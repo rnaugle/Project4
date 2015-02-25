@@ -206,13 +206,25 @@ public ClassVisitor extends Visitor{
 		Semant.Types.Type t2 = e.thenStmt.accept(this);
 		Semant.Types.Type t3 = e.elseStmt.accept(this);
 
-		
+		if (!t1 instanceof Semant.Types.BOOLEAN)
+			System.err.println("ERROR incompatible types: boolean required, but " +t1.toString()+" found:");
+		else
+			return t1;
 	}
-	  public Semant.Types.Type visit(IntegerLiteral e);
+	  public Semant.Types.Type visit(IntegerLiteral e)
+		{ return new INT(); }
 	  public Semant.Types.Type visit(IntegerType e){
 		  return new Semant.Types.INT();
 	  }
-	  public Semant.Types.Type visit(LesserExpr e);
+	  public Semant.Types.Type visit(LesserExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if(t1 instanceof Semant.Types.INT && t2 instanceof Semant.Types.INT)
+			return t1;
+		else
+			System.err.println("ERROR operator < cannot be applied to " t1.toString() +", " +t2.toString());
+	} 
 	  public Semant.Types.Type visit(MethodDecl e){
 		  for(VarDecl v : e.locals){
 			  Semant.Types.Type type = v.visit(this);
@@ -223,8 +235,25 @@ public ClassVisitor extends Visitor{
 		  ot.put(new FUNCTION(e.name, ))
 		  //return 
 	  }
-	  public Semant.Types.Type visit(MulExpr e);
-	  public Semant.Types.Type visit(NegExpr e);
+	  public Semant.Types.Type visit(MulExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if(t1 instanceof Semant.Types.INT && t2 instanceof Semant.Types.INT)
+			return t1;
+		else
+			System.err.println("ERROR operator * cannot be applied to " t1.toString() +", " +t2.toString());
+	} 
+	  public Semant.Types.Type visit(NegExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+		/*if(!(t1 instanceof Semant.Types.INT))
+			//error
+		else
+			return t1;*/
+		//TODO: not sure if this is right
+		return new INT();
+	} 
 	  public Semant.Types.Type visit(NewArrayExpr e);
 	  public Semant.Types.Type visit(NewObjectExpr e);
 	  public Semant.Types.Type visit(NotEqExpr e);

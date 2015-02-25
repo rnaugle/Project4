@@ -216,7 +216,15 @@ public ClassVisitor extends Visitor{
 	  public Semant.Types.Type visit(IntegerType e){
 		  return new Semant.Types.INT();
 	  }
-	  public Semant.Types.Type visit(LesserExpr e);
+	  public Semant.Types.Type visit(LesserExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if(t1 instanceof Semant.Types.INT && t2 instanceof Semant.Types.INT)
+			return t1;
+		else
+			System.err.println("ERROR operator < cannot be applied to " t1.toString() +", " +t2.toString());
+	} 
 	  public Semant.Types.Type visit(MethodDecl e){
 		  for(VarDecl v : e.locals){
 			  Semant.Types.Type type = v.visit(this);
@@ -227,13 +235,42 @@ public ClassVisitor extends Visitor{
 		  ot.put(new FUNCTION(e.name, ))
 		  //return 
 	  }
-	  public Semant.Types.Type visit(MulExpr e);
-	  public Semant.Types.Type visit(NegExpr e);
+	  public Semant.Types.Type visit(MulExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if(t1 instanceof Semant.Types.INT && t2 instanceof Semant.Types.INT)
+			return t1;
+		else
+			System.err.println("ERROR operator * cannot be applied to " t1.toString() +", " +t2.toString());
+	} 
+	  public Semant.Types.Type visit(NegExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+		/*if(!(t1 instanceof Semant.Types.INT))
+			//error
+		else
+			return t1;*/
+		//TODO: not sure if this is right
+		return new INT();
+	} 
 	  public Semant.Types.Type visit(NewArrayExpr e);
+	{
+	Semant.Types.Type t = e.type.accept(this);
+	
+	if(t instanceof Semant.Types.OBJECT)
+		if(ct.get(t.myClass.name) == null)
+			System.err.println("ERROR cannot resolve class "+t.myClass.name.toString());
+		else 
+			return new Semant.Types.OBJECT(t.myClass);
+	else
+		return t;
+	}
 	  public Semant.Types.Type visit(NewObjectExpr e);
 	  public Semant.Types.Type visit(NotEqExpr e);
 	  
-	  public Semant.Types.Type visit(NullExpr e);
+	  public Semant.Types.Type visit(NullExpr e)
+		{ return new Semant.Types.NIL(); }
 	  public Semant.Types.Type visit(OrExpr e);
 	 
 	  

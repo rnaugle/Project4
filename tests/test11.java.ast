@@ -13,9 +13,10 @@ Program(
       IntegerLiteral(6)))
      AbstractList(
       IfStmt(
-       IdentifierExpr(m)
+       TrueExpr
        AssignStmt(
         IdentifierExpr(m)
-        IntegerLiteral(9))
+        NegExpr(
+         IdentifierExpr(m)))
        null))
      IntegerLiteral(0))))))
