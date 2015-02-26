@@ -258,33 +258,95 @@ public ClassVisitor extends Visitor{
 	{
 	Semant.Types.Type t = e.type.accept(this);
 	
-	if(t instanceof Semant.Types.OBJECT)
+	if(t instanceof Semant.Types.OBJECT){
 		if(ct.get(t.myClass.name) == null)
 			System.err.println("ERROR cannot resolve class "+t.myClass.name.toString());
 		else 
 			return new Semant.Types.OBJECT(t.myClass);
+		}
 	else
 		return t;
 	}
-	  public Semant.Types.Type visit(NewObjectExpr e);
-	  public Semant.Types.Type visit(NotEqExpr e);
+	  public Semant.Types.Type visit(NewObjectExpr e)
+		{ return e.type.accept(this); }
+		
+	  public Semant.Types.Type visit(NotEqExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if((t1 instanceof Semant.Types.INT && t2 instanceof Semant.Types.INT) || (t1 instanceof Semant.Types.BOOLEAN && t2 instanceof Semant.Types.BOOLEAN))
+			return t1;
+		else
+			System.err.println("ERROR operator != cannot be applied to " t1.toString() +", " +t2.toString());
+	} 
 	  
 	  public Semant.Types.Type visit(NullExpr e)
 		{ return new Semant.Types.NIL(); }
-	  public Semant.Types.Type visit(OrExpr e);
-	 
-	  
+		
+	  public Semant.Types.Type visit(OrExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if((t1 instanceof Semant.Types.BOOLEAN) && (t2 instanceof Semant.Types.BOOLEAN))
+			return t1;
+		else
+			System.err.println("ERROR operator || cannot be applied to " t1.toString() +", " +t2.toString());
+	} 
+	 	  
 	  public Semant.Types.Type visit(Program e){
 		  for(ClassDecl c: e.classes){
 			  c.accept(this;)
 		  }
 	  }
-	  public Semant.Types.Type visit(Stmt e);
-	  public Semant.Types.Type visit(StringLiteral e);
-	  public Semant.Types.Type visit(SubExpr e);
-	  public Semant.Types.Type visit(ThisExpr e);
-	  public Semant.Types.Type visit(ThreadDecl e);
-	  public Semant.Types.Type visit(TrueExpr e);
+	  
+	  public Semant.Types.Type visit(Stmt e) {}
+	  
+	  public Semant.Types.Type visit(StringLiteral e)	
+	{ return new Semant.Types.STRING(); }
+	
+	  public Semant.Types.Type visit(SubExpr e)
+	  {
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if(t1 instanceof Semant.Types.INT && t2 instanceof Semant.Types.INT)
+			return t1;
+		else
+			System.err.println("ERROR operator - cannot be applied to " t1.toString() +", " +t2.toString());
+	}
+	
+	  public Semant.Types.Type visit(ThisExpr e)
+		//TODO how to check and return the current class here?
+	  { return new Semant.Types.OBJECT(); }
+	  public Semant.Types.Type visit(ThreadDecl e){
+	
+		  ot.beginScope();
+		  CLASS c = (CLASS)get(Symbol.symbol(e.name));
+		  CLASS p = (CLASS)get(Symbol.symbol(e.parent));
+		  while(p != null){
+				//TODO check for duplicates and bad overrides
+			  for(FIELD f : p.fields.fields){
+				f.accept(this);
+				c.fields.fields.add(f);
+				}
+			for (FIELD f : p.fields.methods) {
+				f.accept(this);
+				c.fields.methods.add(f);
+				}
+		  }
+		  for(VarDecl v: e.fields){
+			  Semant.Types.Type var = v.accept(this);
+				ot.put(var,var.name);
+		  }
+		  for(MethodDecl m: e.methods){
+			  Semant.Types.Type func = m.accept(this);
+				ot.put(func,func.name);
+		  }
+		  
+		  ot.endScope();
+	  
+	  }
+	  public Semant.Types.Type visit(TrueExpr e)
+	  { return new Semant.Types.BOOLEAN(); }
 	  public Semant.Types.Type visit(Type e){
 		  System.err.println("THIS SHOULDNT HAPPEN");
 	  }
@@ -313,9 +375,21 @@ public ClassVisitor extends Visitor{
 		  
 		  
 	  }
-	  public Semant.Types.Type visit(VoidDecl e);
+	  public Semant.Types.Type visit(VoidDecl e)
+	  { return new Semant.Types.VOID(); }
 	  public Semant.Types.Type visit(WhileStmt e);
-	  public Semant.Types.Type visit(XinuCallStmt e);
+	  {
+		e.body.accept(this);
+		return e.test.accept(this);
+	  }
+	  public Semant.Types.Type visit(XinuCallStmt e)
+	  {
+		Semant.Types.Type m = ct.get(Symbol.symbol(e.method));
+		if (m == null)
+			System.err.println("ERROR cannot resolve method " + e.method);
+		else 
+			return m;
+	  }
 	  public Semant.Types.Type visit(XinuCallExpr e);
 	  
 	
