@@ -22,6 +22,8 @@ public class STRING extends Type{
 		}
 		return false;
 	}
+	
+	public Semant.Types.Type accept(Semant.Visit.Visitor2 v) { return v.visit(this); }
 
 	@Override
 	public String toString() {

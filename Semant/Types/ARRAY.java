@@ -16,6 +16,7 @@ public class ARRAY extends Type  {
 		
 	}
 
+	public Semant.Types.Type accept(Semant.Visit.Visitor2 v) { return v.visit(this); }
 	@Override
 	public
 	boolean coerceTo(Type t) {

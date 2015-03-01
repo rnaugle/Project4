@@ -42,6 +42,8 @@ public class RECORD extends Type implements java.lang.Iterable<FIELD>{
 		v.visit(this);
 		
 	}
+	
+	public Semant.Types.Type accept(Semant.Visit.Visitor2 v) { return v.visit(this); }
 
 	@Override
 	public boolean coerceTo(Type t) {

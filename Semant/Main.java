@@ -108,10 +108,10 @@ public class Main {
         	//OBJECT instance = new OBJECT(c1, );
         	RECORD methods = new RECORD();
         	for(Semant.Absyn.MethodDecl md : cd.methods){
-        		RECORD formals = new RECORD;
+        		RECORD formals = new RECORD();
         		for(Semant.Absyn.Formal form: md.params){
-        			if(form.type instanceof )
-        			formals.put(Symbol.symbol(formal), );
+        			//if(form.type instanceof )
+        			formals.put(Semant.Symbol.Symbol.symbol(form), form.type);
         		}
         		methods.put(new FUNCTION(Symbol.symbol(md.name),null, new RECORD(), null), Symbol.symbol(md.name));
         		
@@ -139,7 +139,6 @@ public class Main {
     for(Semant.Absyn.ClassDecl cd : pm.classes){
     	CLASS c1 = (CLASS)tb.get(Symbol.symbol(cd.name));
     	String ogClassName = cd.name;
-    	String ogClassName = cd.name;
     	if(cd.parent == null){
     		   	
     	}else{
@@ -166,7 +165,6 @@ public class Main {
     }
     
     
-    
 	
 
 
@@ -178,8 +176,10 @@ public class Main {
     //                    System.out.println();
     
     //                         System.out.println("Abstract Syntax Tree:");
-            Semant.Visit.AbsynPrintVisitor apv = new Semant.Visit.AbsynPrintVisitor();
-            apv.visit(pm);
+           //Semant.Visit.AbsynPrintVisitor apv = new Semant.Visit.AbsynPrintVisitor();
+            //apv.visit(pm);
+	Semant.Visit.TypeVisitor cv = new Semant.Visit.TypeVisitor();
+	cv.visit(pm);
      //       System.out.println();
      //       System.out.println();
     //        System.out.println("Interpreter:");
@@ -190,7 +190,7 @@ public class Main {
 	//public static parent merge
  //Main
 
-
+/*
 static CLASS convertClassDecl(Semant.Absyn.ClassDecl cd)
 {
 	tb.beginScope();
@@ -424,5 +424,5 @@ static Type createTypeARRAY(Semant.Absyn.Type type)
 	else
 		return null;
 }
-
+*/
 }

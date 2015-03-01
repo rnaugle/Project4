@@ -12,4 +12,6 @@ public class AddExpr extends BinOpExpr {
 	  {   return this.e1 + " + " + this.e2;   }
 	
 	 public void accept(Semant.Visit.Visitor v)      {          v.visit(this);   }
+	 
+	 public Semant.Types.Type accept(Semant.Visit.Visitor2 v) { v.visit(this); }
 }

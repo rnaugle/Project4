@@ -9,6 +9,8 @@ public class VOID extends Type{
 		v.visit(this);
 	}
 
+	public Semant.Types.Type accept(Semant.Visit.Visitor2 v) { return v.visit(this); }
+
 	@Override
 	public boolean coerceTo(Type t) {
 		// TODO Auto-generated method stub

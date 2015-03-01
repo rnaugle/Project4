@@ -108,9 +108,9 @@ public class Main {
         	//OBJECT instance = new OBJECT(c1, );
         	RECORD methods = new RECORD();
         	for(Semant.Absyn.MethodDecl md : cd.methods){
-        		RECORD formals = new RECORD;
+        		RECORD formals = new RECORD();
         		for(Semant.Absyn.Formal form: md.params){
-        			if(form.type instanceof )
+        			//if(form.type instanceof )
         			formals.put(Symbol.symbol(formal), );
         		}
         		methods.put(new FUNCTION(Symbol.symbol(md.name),null, new RECORD(), null), Symbol.symbol(md.name));
@@ -139,7 +139,6 @@ public class Main {
     for(Semant.Absyn.ClassDecl cd : pm.classes){
     	CLASS c1 = (CLASS)tb.get(Symbol.symbol(cd.name));
     	String ogClassName = cd.name;
-    	String ogClassName = cd.name;
     	if(cd.parent == null){
     		   	
     	}else{
@@ -164,7 +163,7 @@ public class Main {
     for(Semant.Absyn.ClassDecl cd : pm.classes){
     	CLASS c1 = (CLASS)tb.get(Symbol.symbol(cd.name));
     }
-    
+    http://www.azlyrics.com/lyrics/frontbottoms/lookinglikeyoujustwokeup.html
     
     
 	
@@ -178,8 +177,10 @@ public class Main {
     //                    System.out.println();
     
     //                         System.out.println("Abstract Syntax Tree:");
-            Semant.Visit.AbsynPrintVisitor apv = new Semant.Visit.AbsynPrintVisitor();
-            apv.visit(pm);
+           //Semant.Visit.AbsynPrintVisitor apv = new Semant.Visit.AbsynPrintVisitor();
+            //apv.visit(pm);
+	Semant.Visit.ClassVisitor cv = new Semant.Visit.ClassVisitor();
+	cv.visit(pm);
      //       System.out.println();
      //       System.out.println();
     //        System.out.println("Interpreter:");
@@ -190,7 +191,7 @@ public class Main {
 	//public static parent merge
  //Main
 
-
+/*
 static CLASS convertClassDecl(Semant.Absyn.ClassDecl cd)
 {
 	tb.beginScope();
@@ -251,7 +252,7 @@ static Type returnVarDeclTYPE(Semant.Absyn.VarDecl field)
 static Type returnARRAYTYPE(Semant.Absyn.ArrayType array)
 {
 	if (array.type instanceof Semant.Absyn.IdentifierType)
-		return OBJECT;
+		return new OBJECT;
 	else if (array.type instanceof Semant.Absyn.BooleanType)
 		return BOOLEAN;
 	else
@@ -424,5 +425,5 @@ static Type createTypeARRAY(Semant.Absyn.Type type)
 	else
 		return null;
 }
-
+*/
 }

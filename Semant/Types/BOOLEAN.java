@@ -12,6 +12,8 @@ public class BOOLEAN extends Type {
 		v.visit(this);
 		
 	}
+	
+	public Semant.Types.Type accept(Semant.Visit.Visitor2 v) { return v.visit(this); }
 
 	@Override
 	public
