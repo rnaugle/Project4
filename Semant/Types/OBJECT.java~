@@ -1,6 +1,6 @@
 package Semant.Types;
 
-import Semant.Visitor;
+//import Semant.Visitor;
 
 public class OBJECT extends Type{
 	
@@ -21,7 +21,7 @@ public class OBJECT extends Type{
 	}
 
 	@Override
-	public void accept(Visitor v) {
+	public void accept(Semant.Visit.Visitor v) {
 		// TODO Auto-generated method stub
 		
 	}

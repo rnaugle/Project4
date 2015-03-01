@@ -7,5 +7,5 @@ public abstract class Absyn implements Semant.Visit.Visitable{
 	public void accept(Semant.Visit.Visitor v){v.visit(this);}
 	
 
-	
+	public Semant.Types.Type accept(Semant.Visit.Visitor2 v) { v.visit(this); }
 }

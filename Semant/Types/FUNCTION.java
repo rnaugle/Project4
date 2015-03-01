@@ -23,9 +23,10 @@ public class FUNCTION extends Type{
 
 	@Override
 	public void accept(Semant.Visit.Visitor v) {
-		// TODO Auto-generated method stub
-		
+		v.visit(this);
 	}
+	
+	public Semant.Types.Type accept(Semant.Visit.Visitor2 v) { return v.visit(this); }
 
 	@Override
 	public boolean coerceTo(Type t) {

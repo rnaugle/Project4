@@ -13,7 +13,11 @@ public ClassVisitor extends Visitor{
 	}
 	
 	
+<<<<<<< HEAD
 		public Semant.Types.Type visit(Absyn a);
+=======
+		public Semant.Types.Type visit(Absyn a){}
+>>>>>>> nidaBranch
 		
 	  public Semant.Types.Type visit(AddExpr e)
 	  {	
@@ -104,6 +108,7 @@ public ClassVisitor extends Visitor{
 		Semant.Types.Type t = e.target.accept(this);
 		Semant.Types.Type tm = ct.get(Symbol.symbol(e.method));
 		
+<<<<<<< HEAD
 		//TODO count formals
 		
 		if (tm == null || !tm instanceof FUNCTION)
@@ -112,6 +117,35 @@ public ClassVisitor extends Visitor{
 			
 			
 	  }
+=======
+		if (tm == null || !tm instanceof FUNCTION)
+			System.err.println("ERROR cannot resolve method " + e.method);
+		else if ((countFormals((RECORD)tm.formals) != e.args.size()))
+			System.err.println("ERROR mismatch in number of arguments");
+		else if(!compareFormals((Semant.Types.RECORD)tm.formals,e.args))
+			System.err.println("ERROR incompatible types: " +t1.toString+" required, but "+t2.toString()+" found:";
+		else
+			return t;			
+	  }
+
+	public int countFormals(Semant.Types.RECORD r)
+	{
+		return r.fields.size();
+	}
+
+	public boolean compareFormals(Semant.Types.RECORD rs, LinkedList<Formals> fs)
+	{
+		for (int i = 0; i < rs.fields.size(); i++)
+		{
+			Semant.Types.Type t1 = rs.fields.get(i).type;
+			Semant.Types.Type t2 = fs.get(i).accept(this);
+			if (!t2.coerceTo(t1))
+				return false;
+		}
+		return true;
+	}
+	
+>>>>>>> nidaBranch
 	  public Semant.Types.Type visit(ClassDecl e){
 	
 		  ot.beginScope();
@@ -121,6 +155,7 @@ public ClassVisitor extends Visitor{
 			  for(FIELD f : p.)
 		  }
 		  for(MethodDecl m: e.methods){
+<<<<<<< HEAD
 			  m.accept(this;)
 		  }
 		  
@@ -135,6 +170,60 @@ public ClassVisitor extends Visitor{
 	  public Semant.Types.Type visit(Formal e);
 	  public Semant.Types.Type visit(GreaterExpr e);
 	  public Semant.Types.Type visit(IdentifierExpr e);
+=======
+			  Semant.Types.Type func = m.accept(this);
+			ot.put(func,func.name);
+		  }
+		  
+		  ot.endScope();
+	  
+	  }
+	  public Semant.Types.Type visit(DivExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if(t1 instanceof Semant.Types.INT && t2 instanceof Semant.Types.INT)
+			return t1;
+		else
+			System.err.println("ERROR operator / cannot be applied to " t1.toString() +", " +t2.toString());
+	}
+
+	  public Semant.Types.Type visit(EqualExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if((t1 instanceof Semant.Types.INT && t2 instanceof Semant.Types.INT) || (t1 instanceof Semant.Types.BOOLEAN && t2 instanceof Semant.Types.BOOLEAN))
+			return t1;
+		else
+			System.err.println("ERROR operator == cannot be applied to " t1.toString() +", " +t2.toString());
+	} 
+
+	  public Semant.Types.Type visit(Expr e){}
+	  public Semant.Types.Type visit(FalseExpr e)
+	{
+		return new Semant.Types.BOOLEAN();
+	}
+	  public Semant.Types.Type visit(FieldExpr e)
+	{
+		Semant.Types.Type t = e.target.accept(this);
+		return t;
+	}
+	  public Semant.Types.Type visit(Formal e)
+	{
+		return e.type.visit(this);
+	}
+	  public Semant.Types.Type visit(GreaterExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if(t1 instanceof Semant.Types.INT && t2 instanceof Semant.Types.INT)
+			return t1;
+		else
+			System.err.println("ERROR operator > cannot be applied to " t1.toString() +", " +t2.toString());
+	} 
+	  public Semant.Types.Type visit(IdentifierExpr e)
+	{ return new STRING(); }
+>>>>>>> nidaBranch
 	  public Semant.Types.Type visit(IdentifierType e){
 		  Semant.Types.Type t = ct.get(Symbol.symbol(e.id));
 		  if(t == null){
@@ -143,12 +232,40 @@ public ClassVisitor extends Visitor{
 			  return t;
 		  }
 	  }
+<<<<<<< HEAD
 	  public Semant.Types.Type visit(IfStmt e);
 	  public Semant.Types.Type visit(IntegerLiteral e);
 	  public Semant.Types.Type visit(IntegerType e){
 		  return new Semant.Types.INT();
 	  }
 	  public Semant.Types.Type visit(LesserExpr e);
+=======
+	  public Semant.Types.Type visit(IfStmt e)
+	{
+		Semant.Types.Type t1 = e.test1.accept(this);
+		Semant.Types.Type t2 = e.thenStmt.accept(this);
+		Semant.Types.Type t3 = e.elseStmt.accept(this);
+
+		if (!t1 instanceof Semant.Types.BOOLEAN)
+			System.err.println("ERROR incompatible types: boolean required, but " +t1.toString()+" found:");
+		else
+			return t1;
+	}
+	  public Semant.Types.Type visit(IntegerLiteral e)
+		{ return new INT(); }
+	  public Semant.Types.Type visit(IntegerType e){
+		  return new Semant.Types.INT();
+	  }
+	  public Semant.Types.Type visit(LesserExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if(t1 instanceof Semant.Types.INT && t2 instanceof Semant.Types.INT)
+			return t1;
+		else
+			System.err.println("ERROR operator < cannot be applied to " t1.toString() +", " +t2.toString());
+	} 
+>>>>>>> nidaBranch
 	  public Semant.Types.Type visit(MethodDecl e){
 		  for(VarDecl v : e.locals){
 			  Semant.Types.Type type = v.visit(this);
@@ -159,8 +276,30 @@ public ClassVisitor extends Visitor{
 		  ot.put(new FUNCTION(e.name, ))
 		  //return 
 	  }
+<<<<<<< HEAD
 	  public Semant.Types.Type visit(MulExpr e);
 	  public Semant.Types.Type visit(NegExpr e);
+=======
+	  public Semant.Types.Type visit(MulExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+	Semant.Types.Type t2 = e.e2.accept(this);
+		if(t1 instanceof Semant.Types.INT && t2 instanceof Semant.Types.INT)
+			return t1;
+		else
+			System.err.println("ERROR operator * cannot be applied to " t1.toString() +", " +t2.toString());
+	} 
+	  public Semant.Types.Type visit(NegExpr e)
+	{
+	Semant.Types.Type t1 = e.e1.accept(this);
+		/*if(!(t1 instanceof Semant.Types.INT))
+			//error
+		else
+			return t1;*/
+		//TODO: not sure if this is right
+		return new INT();
+	} 
+>>>>>>> nidaBranch
 	  public Semant.Types.Type visit(NewArrayExpr e);
 	  public Semant.Types.Type visit(NewObjectExpr e);
 	  public Semant.Types.Type visit(NotEqExpr e);
@@ -214,4 +353,8 @@ public ClassVisitor extends Visitor{
 	  public Semant.Types.Type visit(XinuCallExpr e);
 	  
 	
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> nidaBranch
