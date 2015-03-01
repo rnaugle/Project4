@@ -110,13 +110,8 @@ public class Main {
         	for(Semant.Absyn.MethodDecl md : cd.methods){
         		RECORD formals = new RECORD();
         		for(Semant.Absyn.Formal form: md.params){
-<<<<<<< HEAD
-        			if(form.type instanceof Semant.Absyn.Type)
-        				formals.put(form.type, Symbol.symbol(form));
-=======
         			//if(form.type instanceof )
-        			formals.put(Symbol.symbol(formal), );
->>>>>>> nidaBranch
+        			formals.put(Semant.Symbol.Symbol.symbol(form), form.type);
         		}
         		methods.put(new FUNCTION(Symbol.symbol(md.name),null, new RECORD(), null), Symbol.symbol(md.name));
         		
@@ -144,7 +139,6 @@ public class Main {
     for(Semant.Absyn.ClassDecl cd : pm.classes){
     	CLASS c1 = (CLASS)tb.get(Symbol.symbol(cd.name));
     	String ogClassName = cd.name;
-    	String ogClassName = cd.name;
     	if(cd.parent == null){
     		   	
     	}else{
@@ -169,7 +163,6 @@ public class Main {
     for(Semant.Absyn.ClassDecl cd : pm.classes){
     	CLASS c1 = (CLASS)tb.get(Symbol.symbol(cd.name));
     }
-    http://www.azlyrics.com/lyrics/frontbottoms/lookinglikeyoujustwokeup.html
     
     
 	
@@ -185,7 +178,7 @@ public class Main {
     //                         System.out.println("Abstract Syntax Tree:");
            //Semant.Visit.AbsynPrintVisitor apv = new Semant.Visit.AbsynPrintVisitor();
             //apv.visit(pm);
-	Semant.Visit.ClassVisitor cv = new Semant.Visit.ClassVisitor();
+	Semant.Visit.TypeVisitor cv = new Semant.Visit.TypeVisitor();
 	cv.visit(pm);
      //       System.out.println();
      //       System.out.println();
@@ -194,36 +187,10 @@ public class Main {
            // System.out.println(interp.visit(g));
     }
 	
-<<<<<<< HEAD
-
-
-    // Print Visitor
-    //     System.out.println("Input String:");
-    //         Visit.PrintVisitor pv = new Visit.PrintVisitor();
-    //             pv.visit(g);
-    //                 System.out.println();
-    //                    System.out.println();
-    
-    //                         System.out.println("Abstract Syntax Tree:");
-            Semant.Visit.AbsynPrintVisitor apv = new Semant.Visit.AbsynPrintVisitor();
-            apv.visit(pm);
-     //       System.out.println();
-     //       System.out.println();
-    //        System.out.println("Interpreter:");
-    //        Visit.Interpreter interp = new Visit.Interpreter();
-           // System.out.println(interp.visit(g));
-    }
-	
-	//public static parent merge
- //Main
-
-
-=======
 	//public static parent merge
  //Main
 
 /*
->>>>>>> nidaBranch
 static CLASS convertClassDecl(Semant.Absyn.ClassDecl cd)
 {
 	tb.beginScope();
@@ -273,11 +240,7 @@ static Type returnVarDeclTYPE(Semant.Absyn.VarDecl field)
 {
 	if (field.type instanceof Semant.Absyn.ArrayType)
 		return returnARRAYTYPE(field.type);
-<<<<<<< HEAD
 	else if (field.type instanceof Semant.Absyn.IdentifierType)
-=======
-	else if (field.type instance of Semant.Absyn.IdentifierType)
->>>>>>> nidaBranch
 		return OBJECT;
 	else if (field.type instanceof Semant.Absyn.BooleanType)
 		return BOOLEAN;
@@ -286,10 +249,9 @@ static Type returnVarDeclTYPE(Semant.Absyn.VarDecl field)
 }
 
 static Type returnARRAYTYPE(Semant.Absyn.ArrayType array)
-<<<<<<< HEAD
 {
 	if (array.type instanceof Semant.Absyn.IdentifierType)
-		return OBJECT;
+		return new OBJECT;
 	else if (array.type instanceof Semant.Absyn.BooleanType)
 		return BOOLEAN;
 	else
@@ -361,82 +323,6 @@ static boolean typecheckAndExpr(Semant.Abysn.AndExpr and)
 
 static RECORD createMethodRECORD(java.util.LinkedList<Semant.Absyn.MethodDecl> methods, CLASS c)
 {
-=======
-{
-	if (array.type instanceof Semant.Absyn.IdentifierType)
-		return new OBJECT;
-	else if (array.type instanceof Semant.Absyn.BooleanType)
-		return BOOLEAN;
-	else
-		return INT;
-}
-
-static Type returnExprType(Semant.Absyn.Expr varexpr)
-{
-	if (varexpr instanceof Semant.Abysn.NullExpr)
-		return new NIL();
-	else if (varexpr instanceof Semant.Absyn.AddExpr){
-		if (typecheckAddExpr((Semant.Absyn.AddExpr) varexpr))
-			return new INT();
-		else 
-			return System.exit(0);
-	}
-	//	return typecheckAddExpr((Semant.Absyn.AddExpr) varexpr);
-	else if (varexpr instanceof Semant.Absyn.AndExpr)
-		return typecheckAndExpr((Semant.Absyn.AndExpr) varexpr);
-	else if (varexpr instanceof Semant.Absyn.ArrayExpr)
-		return returnARRAYTYPE((Semant.Absyn.ArrayExpr) varexpr);
-	else if (varexpr instanceof Semant.Absyn.AssignableExpr)
-		return typecheckAssignableExpr((Semant.Absyn.AssignableExpr) varexpr);
-	else if (varexpr instanceof Semant.Absyn.BinOpExpr)//shouldn't really reach this
-		return returnBinOpType((Semant.Absyn.BinOpExpr) varexpr);
-	else if (varexpr instanceof Semant.Abysn.CallExpr)
-		return typecheckCallExpr((Semant.Absyn.CallExpr) varexpr);
-	else if (varexpr instanceof Semant.Absyn.DivExpr)
-		return typecheckDivExpr((Semant.Abysn.DivExpr) varexpr);
-	else if (varexpr instanceof Semant.Abysn.EqualExpr)
-		return typecheckEqualExpr((Semant.Absyn.EqualExpr) varexpr);
-	else if (varexpr instanceof Semant.Abysn.FalseExpr)
-		return new BOOLEAN();
-	else if (varexpr instanceof Semant.Abysn.FieldExpr)
-		return typecheckFieldExpr((Semant.Abysn.FieldExpr) varexpr);
-	else if (varexpr instanceof Semant.Absyn.GreaterExpr)
-		return typecheckGreaterExpr((Semant.Absyn.GreaterExpr) varexpr);
-	else if (varexpr instanceof Semant.Abysn.IdentifierExpr)
-		return typecheckIdentfierExpr((Semant.Abysn.IdentifierExpr) varexpr);
-	else if (varexpr instanceof Semant.Abysn.IntegerLiteral)
-		return new INT();
-	else if (varexpr instanceof Semant.Abysn.LesserExpr)
-		return typecheckLesserExpr((Semant.Abysn.LesserExpr) varexpr);
-	else if 
-}
-
-static boolean typecheckAddExpr(Semant.Absyn.AddExpr add)
-{
-	if(returnExprType(add.e1).coerceTo(returnExprType(add.e2)) && returnExprType(add.e2).coerceTo(returnExprType(add.e1)))
-		return true;
-	else 
-		{
-		System.out.println("ERROR operator + cannot be applied to " + returnExprType(add.e1).toString() + ", " + returnExprType(add.e2).toString()
-			+ "found\n" + Semant.Visit.AbsynPrintVisitor.visit(add) );
-		return false;
-		}
-}
-
-static boolean typecheckAndExpr(Semant.Abysn.AndExpr and)
-{
-	if(returnExprType(and.e1).coerceTo(returnExprType(and.e2)) && returnExprType(and.e2).coerceTo(returnExprType(and.e1)))
-		return true;
-	else{
-		System.out.println("ERROR operator && cannot be applied to " + returnExprType(and.e1).toString() + ", " + returnExprType(and.e2).toString()
-			+ "found\n" + Semant.Visit.AbsynPrintVisitor.visit(and.e2) );
-		return false;
-	}
-}
-
-static RECORD createMethodRECORD(java.util.LinkedList<Semant.Absyn.MethodDecl> methods, CLASS c)
-{
->>>>>>> nidaBranch
 	RECORD m = new RECORD();
 	for (int i = 0; i < methods.size(); i++)
 		m.fields.add(createMethodsFIELD(methods.get(i),i, c));
@@ -538,9 +424,5 @@ static Type createTypeARRAY(Semant.Absyn.Type type)
 	else
 		return null;
 }
-<<<<<<< HEAD
-
-=======
 */
->>>>>>> nidaBranch
 }

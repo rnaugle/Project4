@@ -296,7 +296,7 @@ static Type returnARRAYTYPE(Semant.Absyn.ArrayType array)
 	else if (varexpr instanceof Semant.Abysn.LesserExpr)
 		return typecheckLesserExpr((Semant.Abysn.LesserExpr) varexpr);
 	else if 
-}*/
+
 
 static boolean typecheckAddExpr(Semant.Absyn.AddExpr add)
 {
